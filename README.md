@@ -2,8 +2,9 @@
 
 
 Name ideas:
-Sheeple
-Big farmer/ Big Pharma
+
+Acropalypse
+
 
 # Story Summary
 Player acts as a morally questionable farmer. Worldwide disease has wiped out all plants from being able to grow. This means that the only food available fot human consumption is animals and meat; though the animal feed in storage will only last so long. The player must manage the feed for each of the animals, which will require different amounts of food based on age and pre-set features. 
