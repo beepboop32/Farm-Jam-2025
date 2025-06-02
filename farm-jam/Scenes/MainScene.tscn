@@ -1,3 +1,29 @@
-[gd_scene format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=3 format=3 uid="uid://bprghqf4qb5rb"]
+
+[ext_resource type="Texture2D" uid="uid://crjdustrjvpn6" path="res://icon.svg" id="1_hpc76"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tr2i4"]
+font_size = 32
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Modulator" type="CanvasModulate" parent="."]
+
+[node name="Time Sprite" type="Sprite2D" parent="."]
+position = Vector2(46.25, 20.75)
+scale = Vector2(0.699219, 0.300781)
+texture = ExtResource("1_hpc76")
+
+[node name="Time Text" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 33.0
+offset_right = 87.0
+offset_bottom = 78.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_tr2i4")
+metadata/_edit_use_anchors_ = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(558, 354)
+scale = Vector2(4.05469, 3.07031)
+texture = ExtResource("1_hpc76")
