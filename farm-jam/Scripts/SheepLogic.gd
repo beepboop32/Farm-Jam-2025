@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if moving:
-		var currentSpeed = speed * Global.speed_multiplier
+		var currentSpeed = speed * Global.speedMultiplier
 		velocity.x = direction.x * currentSpeed
 		move_and_slide()
 		
@@ -54,7 +54,7 @@ func _startStopping() -> void:
 
 func _physics_process(delta: float) -> void:
 	if moving:
-		var currentSpeed = speed * Global.speed_multiplier
+		var currentSpeed = speed * Global.speedMultiplier
 		var collision = move_and_collide(direction * currentSpeed * delta)
 		if collision:
 			var normal = collision.get_normal()

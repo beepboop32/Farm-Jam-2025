@@ -5,7 +5,7 @@ extends Node
 @export var duskHour := 20
 @export var darknessStartHour := 18
 @export var lightStartHour := 8
-
+var sanity : float = 1.0
 var timeSpeedMultiplier := 1.0
 var skippingToDusk := false
 var totalMinutes: float = 6 * 60 
