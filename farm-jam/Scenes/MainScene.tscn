@@ -1,18 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=4 format=3 uid="uid://bprghqf4qb5rb"]
 
-[ext_resource type="Texture2D" uid="uid://crjdustrjvpn6" path="res://icon.svg" id="1_hpc76"]
+[ext_resource type="Texture2D" uid="uid://crjdustrjvpn6" path="res://Assets/Sprites/icon.svg" id="1_hpc76"]
+[ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scenes/main_scene.gd" id="1_tr2i4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tr2i4"]
 font_size = 32
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_tr2i4")
 
 [node name="Modulator" type="CanvasModulate" parent="."]
-
-[node name="Time Sprite" type="Sprite2D" parent="."]
-position = Vector2(46.25, 20.75)
-scale = Vector2(0.699219, 0.300781)
-texture = ExtResource("1_hpc76")
 
 [node name="Time Text" type="Label" parent="."]
 offset_left = 5.0
@@ -27,3 +24,12 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(558, 354)
 scale = Vector2(4.05469, 3.07031)
 texture = ExtResource("1_hpc76")
+
+[node name="Time Button" type="TextureButton" parent="."]
+offset_right = 93.0
+offset_bottom = 43.0
+texture_normal = ExtResource("1_hpc76")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="Time Button" to="." method="_on_time_button_pressed"]

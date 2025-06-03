@@ -3,7 +3,10 @@ extends Node
 @export var secondsPerDay := 60.0
 @export var dawnHour := 6
 @export var duskHour := 20
-
+@export var darknessStartHour := 18
+@export var lightStartHour := 8 
+var timeSpeedMultiplier := 1.0
+var skipping_to_dusk := false
 var totalMinutes: float = 6 * 60 
 var currentDay: int = 1
 var isDaytime: bool = true
@@ -12,13 +15,19 @@ var isDaytime: bool = true
 
 func _process(delta: float) -> void:
 	var minutesPerSecond = 24 * 60 / secondsPerDay
-	totalMinutes += minutesPerSecond * delta
+	totalMinutes += minutesPerSecond * delta * timeSpeedMultiplier
 	if totalMinutes >= 1440:
 		totalMinutes -= 1440
 		currentDay += 1
+	if skipping_to_dusk:
+		if (totalMinutes / 60.0) >= duskHour:
+			timeSpeedMultiplier = 1.0
+			skipping_to_dusk = false
+			totalMinutes = duskHour * 60
 	updateTimeLabel()
 	updateBrightness()
 	checkDayNight()
+
 
 func updateTimeLabel() -> void:
 	var hours = int(totalMinutes) / 60
@@ -27,19 +36,47 @@ func updateTimeLabel() -> void:
 	if label and label is Label:
 		label.text = "%02d:%02d" % [hours, minutes]
 
+func in_range(x: float, start: float, end: float) -> bool:
+	if start <= end:
+		return x >= start and x < end
+	else:
+		return x >= start or x < end
+
 func updateBrightness() -> void:
 	var hour = totalMinutes / 60.0
-	var brightness = 0.4
-
-	if hour >= dawnHour and hour <= duskHour:
-		brightness = 1.0
-	elif hour < dawnHour:
-		brightness = lerp(0.4, 1.0, (hour + (24 - duskHour)) / (dawnHour + (24 - duskHour)))
-	elif hour > duskHour:
-		brightness = lerp(1.0, 0.4, (hour - duskHour) / (24 - duskHour + dawnHour))
-
+	var brightness: float
+	var color: Color
+	var night_brightness = 0.4
+	var day_brightness = 1.0
+	var night_color = Color(1.0, 0.85, 0.7, 1.0)
+	if in_range(hour, duskHour, dawnHour):
+		brightness = night_brightness
+		color = night_color
+	elif in_range(hour, darknessStartHour, duskHour):
+		var t = (hour - darknessStartHour) / (duskHour - darknessStartHour)
+		brightness = lerp(day_brightness, night_brightness, t)
+		color = Color(
+			lerp(1.0, night_color.r, t),
+			lerp(1.0, night_color.g, t),
+			lerp(1.0, night_color.b, t),
+			1.0
+		)
+	elif in_range(hour, dawnHour, lightStartHour):
+		var t = (hour - dawnHour) / (lightStartHour - dawnHour)
+		brightness = lerp(night_brightness, day_brightness, t)
+		color = Color(
+			lerp(night_color.r, 1.0, t),
+			lerp(night_color.g, 1.0, t),
+			lerp(night_color.b, 1.0, t),
+			1.0
+		)
+	else:
+		brightness = day_brightness
+		color = Color(1, 1, 1, 1)
 	if modulator:
-		modulator.color = Color(brightness, brightness, brightness, 1.0)
+		modulator.color = Color(color.r * brightness, color.g * brightness, color.b * brightness, 1.0)
+
+
 
 func checkDayNight() -> void:
 	var hour = int(totalMinutes) / 60
@@ -50,3 +87,7 @@ func checkDayNight() -> void:
 			print("Day started: Day", currentDay)
 		else:
 			print("Night started: Day", currentDay)
+
+func skipCycle() -> void:
+	timeSpeedMultiplier = 10.0 
+	skipping_to_dusk = true
