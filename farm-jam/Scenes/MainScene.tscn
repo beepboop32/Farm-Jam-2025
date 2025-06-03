@@ -1,35 +1,132 @@
-[gd_scene load_steps=4 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=17 format=3 uid="uid://bprghqf4qb5rb"]
 
-[ext_resource type="Texture2D" uid="uid://crjdustrjvpn6" path="res://Assets/Sprites/icon.svg" id="1_hpc76"]
-[ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scenes/main_scene.gd" id="1_tr2i4"]
+[ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
+[ext_resource type="Texture2D" uid="uid://dqxlanv3klap3" path="res://Assets/Sprites/pixelart/farmScene.png" id="2_qxria"]
+[ext_resource type="Texture2D" uid="uid://dasgkix1rstcy" path="res://Assets/Sprites/pixelart/timeProgressBar.png" id="3_y4jh7"]
+[ext_resource type="FontFile" uid="uid://06ad2pstj334" path="res://Assets/Daydream.ttf" id="4_q68mp"]
+[ext_resource type="Texture2D" uid="uid://bkbd4y6wdsolk" path="res://Assets/Sprites/pixelart/sun.png" id="5_f140w"]
+[ext_resource type="Texture2D" uid="uid://bnv6oc7shgdpt" path="res://Assets/Sprites/pixelart/sanityMeter.png" id="6_q68mp"]
+[ext_resource type="Texture2D" uid="uid://n4m3fkvrfpek" path="res://Assets/Sprites/pixelart/happySanity.png" id="7_f140w"]
+[ext_resource type="Script" uid="uid://c1apamy5jl4cu" path="res://Scripts/button.gd" id="8_f140w"]
+[ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="9_0iob3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tr2i4"]
-font_size = 32
+font = ExtResource("4_q68mp")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxria"]
+size = Vector2(24, 356)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4jh7"]
+size = Vector2(319, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q68mp"]
+size = Vector2(27, 209)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f140w"]
+size = Vector2(109.5, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0iob3"]
+size = Vector2(21, 172.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4b75m"]
+size = Vector2(439.5, 57)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_tr2i4")
 
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_qxria")
+centered = false
+metadata/_edit_lock_ = true
+
 [node name="Modulator" type="CanvasModulate" parent="."]
 
-[node name="Time Text" type="Label" parent="."]
-offset_left = 5.0
-offset_top = 33.0
-offset_right = 87.0
-offset_bottom = 78.0
+[node name="Time Stuff" type="Node2D" parent="."]
+position = Vector2(6, 13)
+
+[node name="Time Progress Bar" type="TextureButton" parent="Time Stuff"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 26.0
+offset_right = 31.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+texture_normal = ExtResource("3_y4jh7")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Time Text" type="Label" parent="Time Stuff"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 32.0
+offset_right = 107.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "00:00"
 label_settings = SubResource("LabelSettings_tr2i4")
 metadata/_edit_use_anchors_ = true
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(558, 354)
-scale = Vector2(4.05469, 3.07031)
-texture = ExtResource("1_hpc76")
+[node name="Sun Sprite" type="Sprite2D" parent="Time Stuff"]
+position = Vector2(118, 33)
+texture = ExtResource("5_f140w")
 
-[node name="Time Button" type="TextureButton" parent="."]
-offset_right = 93.0
-offset_bottom = 43.0
-texture_normal = ExtResource("1_hpc76")
-ignore_texture_size = true
-stretch_mode = 0
+[node name="Sheep Pen" type="StaticBody2D" parent="."]
 
-[connection signal="pressed" from="Time Button" to="." method="_on_time_button_pressed"]
+[node name="Wall 1" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(36, 340)
+shape = SubResource("RectangleShape2D_qxria")
+
+[node name="Wall 2" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(207, 505)
+shape = SubResource("RectangleShape2D_y4jh7")
+
+[node name="Wall 3" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(365.5, 410.5)
+shape = SubResource("RectangleShape2D_q68mp")
+
+[node name="Wall 4" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(407.25, 315.5)
+shape = SubResource("RectangleShape2D_f140w")
+
+[node name="Wall 5" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(452.5, 239.25)
+shape = SubResource("RectangleShape2D_0iob3")
+
+[node name="Wall 6" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(242.75, 180.5)
+shape = SubResource("RectangleShape2D_4b75m")
+
+[node name="Insanity Stuff" type="Node2D" parent="."]
+
+[node name="SanityMeter" type="Sprite2D" parent="Insanity Stuff"]
+position = Vector2(1044, 19)
+scale = Vector2(5, 5)
+texture = ExtResource("6_q68mp")
+
+[node name="Sanity Face" type="Sprite2D" parent="Insanity Stuff"]
+position = Vector2(1090, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("7_f140w")
+
+[node name="Button" type="Button" parent="." node_paths=PackedStringArray("spawn_point")]
+offset_left = 992.0
+offset_top = 608.0
+offset_right = 1153.0
+offset_bottom = 650.0
+text = "CREATE SHEEP"
+script = ExtResource("8_f140w")
+sheep_scene = ExtResource("9_0iob3")
+spawn_point = NodePath("../Spawn Point")
+
+[node name="Spawn Point" type="Node2D" parent="."]
+position = Vector2(208, 343)
+
+[connection signal="pressed" from="Time Stuff/Time Progress Bar" to="." method="_on_time_button_pressed"]

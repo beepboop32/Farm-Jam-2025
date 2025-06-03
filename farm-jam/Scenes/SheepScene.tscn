@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2tq7thewar7n"]
+
+[ext_resource type="Texture2D" uid="uid://bh8x8jwn464mg" path="res://Assets/pngtree-sheep-isolated-on-transparent-background-png-image_9173069.png" id="1_fcrfa"]
+[ext_resource type="Script" uid="uid://uj4kxq1uj6mq" path="res://Scripts/SheepLogic.gd" id="1_u3a04"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcrfa"]
+size = Vector2(39, 46)
+
+[node name="Sheep" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_u3a04")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.046)
+texture = ExtResource("1_fcrfa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_fcrfa")
