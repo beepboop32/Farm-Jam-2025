@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=19 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bnv6oc7shgdpt" path="res://Assets/Sprites/pixelart/sanityMeter.png" id="6_q68mp"]
 [ext_resource type="Texture2D" uid="uid://y7kt2wy2my0c" path="res://Assets/Sprites/pixelart/sadSanity.png" id="7_8ju71"]
 [ext_resource type="Texture2D" uid="uid://n4m3fkvrfpek" path="res://Assets/Sprites/pixelart/happySanity.png" id="7_f140w"]
-[ext_resource type="Script" uid="uid://c1apamy5jl4cu" path="res://Scripts/SheepCreate.gd" id="8_f140w"]
 [ext_resource type="Texture2D" uid="uid://cbtv3e7butlam" path="res://Assets/Sprites/pixelart/midSanity.png" id="8_xb4mg"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="9_0iob3"]
 
@@ -34,8 +33,10 @@ size = Vector2(21, 172.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4b75m"]
 size = Vector2(439.5, 57)
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("spawnPoint")]
 script = ExtResource("1_tr2i4")
+sheepScene = ExtResource("9_0iob3")
+spawnPoint = NodePath("Spawn Point")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_xb4mg")
@@ -124,25 +125,14 @@ position = Vector2(10, 0.5)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("7_f140w")
 
-[node name="CreateSheep" type="Button" parent="." node_paths=PackedStringArray("spawnPoint")]
-offset_left = 992.0
-offset_top = 608.0
-offset_right = 1153.0
-offset_bottom = 650.0
-text = "CREATE SHEEP"
-script = ExtResource("8_f140w")
-sheepScene = ExtResource("9_0iob3")
-spawnPoint = NodePath("../Spawn Point")
-metadata/_edit_use_anchors_ = true
-
 [node name="Spawn Point" type="Node2D" parent="."]
 position = Vector2(205, 343)
 
 [node name="Decrease Sanity" type="Button" parent="."]
-offset_left = 778.0
-offset_top = 608.0
-offset_right = 993.0
-offset_bottom = 650.0
+offset_left = 941.0
+offset_top = 603.0
+offset_right = 1156.0
+offset_bottom = 645.0
 text = "Decrease Sanity"
 metadata/_edit_use_anchors_ = true
 

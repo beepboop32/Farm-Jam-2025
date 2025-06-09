@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh8x8jwn464mg"
-path="res://.godot/imported/pngtree-sheep-isolated-on-transparent-background-png-image_9173069.png-2b27afa8b44db98dc39f69979f93afee.ctex"
+uid="uid://bc4048pcsv4sd"
+path="res://.godot/imported/brownSheep1t.png-ef473dcf8e79b6a1c28e80931a1b7061.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/pngtree-sheep-isolated-on-transparent-background-png-image_9173069.png"
-dest_files=["res://.godot/imported/pngtree-sheep-isolated-on-transparent-background-png-image_9173069.png-2b27afa8b44db98dc39f69979f93afee.ctex"]
+source_file="res://Assets/Sprites/pixelart/brownSheep1t.png"
+dest_files=["res://.godot/imported/brownSheep1t.png-ef473dcf8e79b6a1c28e80931a1b7061.ctex"]
 
 [params]
 

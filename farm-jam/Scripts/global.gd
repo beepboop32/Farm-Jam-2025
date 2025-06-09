@@ -12,6 +12,7 @@ var totalMinutes: float = 6 * 60
 var currentDay: int = 1
 var isDaytime: bool = true
 var speedMultiplier := 1.0
+var sheepCount = 12
 
 @onready var modulator: CanvasModulate = get_tree().current_scene.get_node("Modulator")
 
@@ -34,7 +35,9 @@ func _process(delta: float) -> void:
 func updateTimeLabel() -> void:
 	var hours = int(totalMinutes) / 60
 	var minutes = int(totalMinutes) % 60
-	var timeStuff = get_tree().get_current_scene().get_node_or_null("Time Stuff")
+	var timeStuff
+	if get_tree().get_current_scene():
+		timeStuff = get_tree().get_current_scene().get_node_or_null("Time Stuff")
 	if timeStuff:
 		var label = timeStuff.get_node_or_null("Time Text")
 		if label and label is Label:
@@ -85,10 +88,9 @@ func checkDayNight() -> void:
 	var newIsDaytime = hour >= dawnHour and hour < duskHour
 	if newIsDaytime != isDaytime:
 		isDaytime = newIsDaytime
-		if isDaytime:
-			print("Day started: Day", currentDay)
-		else:
-			print("Night started: Day", currentDay)
+		if !isDaytime:
+			get_tree().change_scene_to_file("res://Scenes/HomeScene.tscn")
+			timeSpeedMultiplier = 0.0
 
 func skipCycle() -> void:
 	timeSpeedMultiplier = 10.0 
