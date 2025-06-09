@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var stopDurationRange := Vector2(1, 2)
 @export var jumpStrength := 250.0
 @export var gravity := 800.0
+@export var SpriteA : Texture2D
+@export var SpriteB : Texture2D
 
 var moving := false
 var timer := 0.0
@@ -18,6 +20,11 @@ var verticalVelocity := 0.0
 
 func _ready() -> void:
 	_startMoving()
+	var random = randf()
+	if random <= 0.8:
+		$Sprite2D.texture = SpriteA
+	else:
+		$Sprite2D.texture = SpriteB
 
 func _process(delta: float) -> void:
 	if moving:
