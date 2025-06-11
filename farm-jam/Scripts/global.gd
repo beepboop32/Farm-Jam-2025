@@ -13,6 +13,8 @@ var currentDay: int = 1
 var isDaytime: bool = true
 var speedMultiplier := 1.0
 var sheepCount = 12
+var foodInHand = 0
+var foodInBox = 100
 
 @onready var modulator: CanvasModulate = get_tree().current_scene.get_node("Modulator")
 
@@ -80,6 +82,7 @@ func updateBrightness() -> void:
 	else:
 		brightness = dayBrightness
 		color = Color(1, 1, 1, 1)
+	modulator = get_tree().current_scene.get_node("Modulator")
 	if modulator:
 		modulator.color = Color(color.r * brightness, color.g * brightness, color.b * brightness, 1.0)
 

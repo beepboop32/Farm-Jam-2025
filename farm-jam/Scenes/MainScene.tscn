@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=22 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://n4m3fkvrfpek" path="res://Assets/Sprites/pixelart/happySanity.png" id="7_f140w"]
 [ext_resource type="Texture2D" uid="uid://cbtv3e7butlam" path="res://Assets/Sprites/pixelart/midSanity.png" id="8_xb4mg"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="9_0iob3"]
+[ext_resource type="Texture2D" uid="uid://b0bkrkykwraca" path="res://Assets/Sprites/pixelart/deadTree1.png" id="12_xb4mg"]
+[ext_resource type="Script" uid="uid://bcoiupcd3oktd" path="res://Scripts/FoodBox.gd" id="13_6t1o7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tr2i4"]
 font = ExtResource("4_q68mp")
@@ -33,17 +35,20 @@ size = Vector2(21, 172.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4b75m"]
 size = Vector2(439.5, 57)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qxwa"]
+size = Vector2(115, 122)
+
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("spawnPoint")]
 script = ExtResource("1_tr2i4")
 sheepScene = ExtResource("9_0iob3")
 spawnPoint = NodePath("Spawn Point")
 
+[node name="Modulator" type="CanvasModulate" parent="."]
+
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_xb4mg")
 centered = false
 metadata/_edit_lock_ = true
-
-[node name="Modulator" type="CanvasModulate" parent="."]
 
 [node name="Time Stuff" type="Node2D" parent="."]
 position = Vector2(6, 13)
@@ -136,5 +141,36 @@ offset_bottom = 645.0
 text = "Decrease Sanity"
 metadata/_edit_use_anchors_ = true
 
+[node name="Dead Tree 1" type="Sprite2D" parent="."]
+visibility_layer = 512
+z_index = 4096
+position = Vector2(103, 473.5)
+scale = Vector2(5, 6.03125)
+texture = ExtResource("12_xb4mg")
+
+[node name="FoodBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = 477.0
+offset_top = 452.0
+offset_right = 560.0
+offset_bottom = 492.0
+rotation = -0.383972
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 5
+stretch_margin_right = 6
+texture_progress = ExtResource("3_y4jh7")
+tint_progress = Color(1, 1, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(514, 471)
+script = ExtResource("13_6t1o7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-8.5, -1)
+shape = SubResource("RectangleShape2D_5qxwa")
+
 [connection signal="pressed" from="Time Stuff/Time Progress Bar" to="." method="_on_time_button_pressed"]
 [connection signal="pressed" from="Decrease Sanity" to="." method="_on_decrease_sanity_pressed"]
+[connection signal="mouse_entered" from="Area2D" to="Area2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="Area2D" method="_on_mouse_exited"]
