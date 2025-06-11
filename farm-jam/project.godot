@@ -22,7 +22,6 @@ Global="*res://Scripts/global.gd"
 [display]
 
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 
 [rendering]
 
