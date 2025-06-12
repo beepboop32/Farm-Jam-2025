@@ -83,7 +83,7 @@ func updateBrightness() -> void:
 		brightness = dayBrightness
 		color = Color(1, 1, 1, 1)
 	if get_tree().get_current_scene():
-		modulator = get_tree().current_scene.get_node("Modulator")
+		modulator = get_tree().current_scene.get_node_or_null("Modulator")
 	if modulator:
 		modulator.color = Color(color.r * brightness, color.g * brightness, color.b * brightness, 1.0)
 
