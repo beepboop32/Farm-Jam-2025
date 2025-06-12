@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct054atm8foav"]
+[gd_scene load_steps=8 format=3 uid="uid://ct054atm8foav"]
 
 [ext_resource type="Script" uid="uid://hq7weqvxpk7h" path="res://Scripts/home_scene.gd" id="1_5xu7f"]
 [ext_resource type="Texture2D" uid="uid://dhrixjycyu4g" path="res://Assets/Sprites/pixelart/houseInteriorNoTv.png" id="2_5xu7f"]
 [ext_resource type="Texture2D" uid="uid://b5b1remfci1du" path="res://Assets/Sprites/pixelart/tv.png" id="3_mxma7"]
 [ext_resource type="Texture2D" uid="uid://dtuf2phcybq5y" path="res://Assets/2d_lights_and_shadows_neutral_point_light.webp" id="4_63w74"]
+[ext_resource type="Script" uid="uid://cbc87qs0avjnq" path="res://Scripts/lightHouse.gd" id="4_obs24"]
+[ext_resource type="Script" uid="uid://bv1ja2dp07760" path="res://Scripts/lamp_light.gd" id="5_obs24"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mxma7"]
 
@@ -27,17 +29,22 @@ texture = ExtResource("2_5xu7f")
 
 [node name="TV Light" type="PointLight2D" parent="."]
 z_index = 1
-position = Vector2(819, 464)
-scale = Vector2(3.16016, 2.22656)
+position = Vector2(967, 480)
+scale = Vector2(3.66602, 1.94336)
 color = Color(0.435294, 1, 1, 1)
 shadow_filter = 1
 texture = ExtResource("4_63w74")
+script = ExtResource("4_obs24")
+flicker_interval = 0.2
 
 [node name="Lamp Light" type="PointLight2D" parent="."]
 position = Vector2(420, 286)
 scale = Vector2(1.35938, 1.42969)
 energy = 0.45
 texture = ExtResource("4_63w74")
+script = ExtResource("5_obs24")
+base_energy = 0.45
+flicker_speed = 0.5
 
 [node name="Tv" type="Sprite2D" parent="."]
 light_mask = 2
@@ -45,7 +52,14 @@ position = Vector2(989, 477)
 scale = Vector2(1.05082, 1.03727)
 texture = ExtResource("3_mxma7")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="Cig light" type="PointLight2D" parent="."]
+position = Vector2(615.375, 406.329)
+scale = Vector2(0.0107424, 0.0130539)
+color = Color(1, 0.129412, 0, 1)
+energy = 5.0
+texture = ExtResource("4_63w74")
+
+[node name="Smoke Particles" type="CPUParticles2D" parent="."]
 position = Vector2(617, 407)
 amount = 100
 texture = SubResource("CanvasTexture_mxma7")
@@ -60,11 +74,11 @@ scale_amount_min = 5.0
 scale_amount_max = 5.0
 color = Color(1, 0.78594, 0.739542, 0.0823529)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(615.375, 406.329)
-scale = Vector2(0.0107424, 0.0130539)
-color = Color(1, 0.129412, 0, 1)
-energy = 5.0
-texture = ExtResource("4_63w74")
+[node name="Lamp Switch" type="TextureButton" parent="."]
+offset_left = 373.0
+offset_top = 249.0
+offset_right = 473.0
+offset_bottom = 341.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Lamp Switch" to="." method="_on_lamp_switch_pressed"]
