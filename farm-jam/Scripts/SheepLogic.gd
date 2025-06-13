@@ -3,8 +3,6 @@ extends CharacterBody2D
 @export var speed := 50
 @export var moveDurationRange := Vector2(2, 10)
 @export var stopDurationRange := Vector2(1, 2)
-@export var jumpStrength := 250.0
-@export var gravity := 800.0
 @export var SpriteA : Texture2D
 @export var SpriteB : Texture2D
 
@@ -70,3 +68,10 @@ func _physics_process(delta: float) -> void:
 			var newAngle = baseAngle + angleOffset
 
 			direction = Vector2(cos(newAngle), sin(newAngle)).normalized()
+
+
+func _on_mouse_entered():
+	$Sprite2D.get_material().set_shader_parameter("outline_color", Color(1.0, 1.0, 1.0, 1.0)) 
+
+func _on_mouse_exited():
+	$Sprite2D.get_material().set_shader_parameter("outline_color", Color(1.0, 1.0, 1.0, 0.0)) 

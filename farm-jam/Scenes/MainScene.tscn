@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=23 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://n4m3fkvrfpek" path="res://Assets/Sprites/pixelart/happySanity.png" id="7_f140w"]
 [ext_resource type="Texture2D" uid="uid://cbtv3e7butlam" path="res://Assets/Sprites/pixelart/midSanity.png" id="8_xb4mg"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="9_0iob3"]
+[ext_resource type="Material" uid="uid://b74xeffooabws" path="res://Assets/WindyTreeMaterial.tres" id="12_5qxwa"]
 [ext_resource type="Texture2D" uid="uid://b0bkrkykwraca" path="res://Assets/Sprites/pixelart/deadTree1.png" id="12_xb4mg"]
 [ext_resource type="Script" uid="uid://bcoiupcd3oktd" path="res://Scripts/FoodBox.gd" id="13_6t1o7"]
 
@@ -144,6 +145,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Dead Tree 1" type="Sprite2D" parent="."]
 visibility_layer = 512
 z_index = 4096
+material = ExtResource("12_5qxwa")
 position = Vector2(103, 473.5)
 scale = Vector2(5, 6.03125)
 texture = ExtResource("12_xb4mg")

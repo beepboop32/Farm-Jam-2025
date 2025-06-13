@@ -1,22 +1,113 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2tq7thewar7n"]
+[gd_scene load_steps=7 format=3 uid="uid://c2tq7thewar7n"]
 
-[ext_resource type="Script" uid="uid://uj4kxq1uj6mq" path="res://Scripts/SheepLogic.gd" id="1_u3a04"]
 [ext_resource type="Texture2D" uid="uid://bcbqfmmd11gru" path="res://Assets/Sprites/pixelart/brownSheep.png" id="2_fflu7"]
 [ext_resource type="Texture2D" uid="uid://c3qfh1ejnj6sa" path="res://Assets/Sprites/pixelart/sheep.png" id="2_u3a04"]
+[ext_resource type="Shader" uid="uid://be37vr6g1aif0" path="res://Assets/Sheep.gdshader" id="4_ilodc"]
+
+[sub_resource type="GDScript" id="GDScript_u3a04"]
+script/source = "extends CharacterBody2D
+
+@export var speed := 50
+@export var moveDurationRange := Vector2(2, 10)
+@export var stopDurationRange := Vector2(1, 2)
+@export var SpriteA : Texture2D
+@export var SpriteB : Texture2D
+
+var moving := false
+var timer := 0.0
+var moveTime := 0.0
+var stopTime := 0.0
+var direction := Vector2.ZERO
+var waddleAmplitude := 0.15 
+var waddleSpeed := 6.0
+var waddleTime := 0.0
+var verticalVelocity := 0.0
+
+func _ready() -> void:
+	_startMoving()
+	var random = randf()
+	if random <= 0.8:
+		$Sprite2D.texture = SpriteA
+	else:
+		$Sprite2D.texture = SpriteB
+
+func _process(delta: float) -> void:
+	if moving:
+		var currentSpeed = speed * Global.speedMultiplier
+		velocity.x = direction.x * currentSpeed
+		move_and_slide()
+		
+		waddleTime += delta * waddleSpeed
+		rotation = sin(waddleTime) * waddleAmplitude
+		
+		timer += delta
+		if timer >= moveTime:
+			_startStopping()
+	else:
+		velocity = Vector2.ZERO
+		rotation = 0
+		timer += delta
+		if timer >= stopTime:
+			_startMoving()
+
+func _startMoving() -> void:
+	moving = true
+	timer = 0.0
+	moveTime = randf_range(moveDurationRange.x, moveDurationRange.y)
+	
+	var angle = randf() * TAU
+	direction = Vector2(cos(angle), sin(angle)).normalized()
+
+func _startStopping() -> void:
+	moving = false
+	timer = 0.0
+	stopTime = randf_range(stopDurationRange.x, stopDurationRange.y)
+	velocity = Vector2.ZERO
+
+func _physics_process(delta: float) -> void:
+	if moving:
+		var currentSpeed = speed * Global.speedMultiplier
+		var collision = move_and_collide(direction * currentSpeed * delta)
+		if collision:
+			var normal = collision.get_normal()
+			var baseAngle = normal.angle()
+			var angleOffset = randf_range(-PI/2, PI/2)
+			var newAngle = baseAngle + angleOffset
+
+			direction = Vector2(cos(newAngle), sin(newAngle)).normalized()
+
+
+func _on_mouse_entered():
+	$Sprite2D.get_material().set_shader_parameter(\"outline_color\", Color(1.0, 1.0, 1.0, 1.0)) 
+
+func _on_mouse_exited():
+	$Sprite2D.get_material().set_shader_parameter(\"outline_color\", Color(1.0, 1.0, 1.0, 0.0)) 
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ilodc"]
+shader = ExtResource("4_ilodc")
+shader_parameter/outline_width = 0.5
+shader_parameter/outline_color = Color(0, 0, 0, 0)
+shader_parameter/texture_region = Vector4(0, 0, 0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcrfa"]
 size = Vector2(48, 35)
 
 [node name="Sheep" type="CharacterBody2D"]
 collision_layer = 2
-script = ExtResource("1_u3a04")
-SpriteA = ExtResource("2_u3a04")
-SpriteB = ExtResource("2_fflu7")
+input_pickable = true
+script = SubResource("GDScript_u3a04")
+SpriteA = ExtResource("2_fflu7")
+SpriteB = ExtResource("2_u3a04")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ilodc")
 scale = Vector2(1.5, 1.38)
 texture = ExtResource("2_u3a04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_fcrfa")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
