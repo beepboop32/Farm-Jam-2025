@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=26 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
@@ -14,6 +14,11 @@
 [ext_resource type="Material" uid="uid://b74xeffooabws" path="res://Assets/WindyTreeMaterial.tres" id="12_5qxwa"]
 [ext_resource type="Texture2D" uid="uid://b0bkrkykwraca" path="res://Assets/Sprites/pixelart/deadTree1.png" id="12_xb4mg"]
 [ext_resource type="Script" uid="uid://bcoiupcd3oktd" path="res://Scripts/FoodBox.gd" id="13_6t1o7"]
+[ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="15_xc4hf"]
+[ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="16_6rnll"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6rnll"]
+load_path = "res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"
 
 [sub_resource type="LabelSettings" id="LabelSettings_tr2i4"]
 font = ExtResource("4_q68mp")
@@ -44,6 +49,13 @@ script = ExtResource("1_tr2i4")
 sheepScene = ExtResource("9_0iob3")
 spawnPoint = NodePath("Spawn Point")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("15_xc4hf")
+wheat_texture = ExtResource("16_6rnll")
+pointer_texture = SubResource("CompressedTexture2D_6rnll")
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+
 [node name="Modulator" type="CanvasModulate" parent="."]
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -68,7 +80,6 @@ scale = Vector2(5, 5)
 texture_normal = ExtResource("3_y4jh7")
 ignore_texture_size = true
 stretch_mode = 3
-metadata/_edit_use_anchors_ = true
 
 [node name="Time Text" type="Label" parent="Time Stuff"]
 texture_filter = 1
@@ -83,7 +94,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "00:00"
 label_settings = SubResource("LabelSettings_tr2i4")
-metadata/_edit_use_anchors_ = true
 
 [node name="Sun Sprite" type="Sprite2D" parent="Time Stuff"]
 position = Vector2(118, 33)
@@ -140,7 +150,6 @@ offset_top = 603.0
 offset_right = 1156.0
 offset_bottom = 645.0
 text = "Decrease Sanity"
-metadata/_edit_use_anchors_ = true
 
 [node name="Dead Tree 1" type="Sprite2D" parent="."]
 visibility_layer = 512

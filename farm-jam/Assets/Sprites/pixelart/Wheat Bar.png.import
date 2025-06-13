@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvr60md03en1v"
-path="res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"
+uid="uid://c3kldelvgcmps"
+path="res://.godot/imported/Wheat Bar.png-7ddc2f8f447df1e8dc9e93cb9b6065a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/pixelart/mousePointer.png"
-dest_files=["res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"]
+source_file="res://Assets/Sprites/pixelart/Wheat Bar.png"
+dest_files=["res://.godot/imported/Wheat Bar.png-7ddc2f8f447df1e8dc9e93cb9b6065a0.ctex"]
 
 [params]
 

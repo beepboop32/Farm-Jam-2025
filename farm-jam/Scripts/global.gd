@@ -12,7 +12,7 @@ var totalMinutes: float = 6 * 60
 var currentDay: int = 1
 var isDaytime: bool = true
 var speedMultiplier := 1.0
-var sheepCount = 12
+var sheepCount = 2
 var foodInHand = 0
 var foodInBox = 100
 
@@ -100,3 +100,17 @@ func skipCycle() -> void:
 	timeSpeedMultiplier = 10.0 
 	skippingToDusk = true
 	speedMultiplier = 5.0
+
+
+var sheep_data = []
+
+func init_sheep_data(count: int) -> void:
+	if sheep_data.size() != count:
+		sheep_data.clear()
+		for i in range(count):
+			sheep_data.append({
+				"current_hunger": 5,
+				"max_hunger": randi_range(5, 25),
+				"health": 25,
+				"color_choice": randi_range(0, 1)
+			})

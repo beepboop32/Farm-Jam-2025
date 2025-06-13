@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct054atm8foav"]
+[gd_scene load_steps=11 format=3 uid="uid://ct054atm8foav"]
 
 [ext_resource type="Script" uid="uid://hq7weqvxpk7h" path="res://Scripts/home_scene.gd" id="1_5xu7f"]
 [ext_resource type="Texture2D" uid="uid://dhrixjycyu4g" path="res://Assets/Sprites/pixelart/houseInteriorNoTv.png" id="2_5xu7f"]
@@ -6,8 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://dtuf2phcybq5y" path="res://Assets/2d_lights_and_shadows_neutral_point_light.webp" id="4_63w74"]
 [ext_resource type="Script" uid="uid://cbc87qs0avjnq" path="res://Scripts/lightHouse.gd" id="4_obs24"]
 [ext_resource type="Script" uid="uid://bv1ja2dp07760" path="res://Scripts/lamp_light.gd" id="5_obs24"]
+[ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="7_s1txa"]
+[ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="8_molqu"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mxma7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eksxn"]
+load_path = "res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_5xu7f")
@@ -79,6 +84,13 @@ offset_left = 373.0
 offset_top = 249.0
 offset_right = 473.0
 offset_bottom = 341.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("7_s1txa")
+wheat_texture = ExtResource("8_molqu")
+pointer_texture = SubResource("CompressedTexture2D_eksxn")
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Lamp Switch" to="." method="_on_lamp_switch_pressed"]
