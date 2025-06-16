@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3kldelvgcmps"
-path="res://.godot/imported/Wheat Bar.png-7ddc2f8f447df1e8dc9e93cb9b6065a0.ctex"
+uid="uid://d2sc6s7o0ckm8"
+path="res://.godot/imported/thief1.png-9966bdfbf2649082a211f96775bda7c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/pixelart/Wheat Bar.png"
-dest_files=["res://.godot/imported/Wheat Bar.png-7ddc2f8f447df1e8dc9e93cb9b6065a0.ctex"]
+source_file="res://Assets/Sprites/pixelart/thief1.png"
+dest_files=["res://.godot/imported/thief1.png-9966bdfbf2649082a211f96775bda7c8.ctex"]
 
 [params]
 

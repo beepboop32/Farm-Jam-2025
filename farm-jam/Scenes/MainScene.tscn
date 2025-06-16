@@ -181,6 +181,16 @@ script = ExtResource("13_6t1o7")
 position = Vector2(-8.5, -1)
 shape = SubResource("RectangleShape2D_5qxwa")
 
+[node name="Day Counter" type="Label" parent="."]
+offset_left = 6.0
+offset_top = 2.0
+offset_right = 1153.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("4_q68mp")
+theme_override_font_sizes/font_size = 30
+text = "--Day 0--"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="Time Stuff/Time Progress Bar" to="." method="_on_time_button_pressed"]
 [connection signal="pressed" from="Decrease Sanity" to="." method="_on_decrease_sanity_pressed"]
 [connection signal="mouse_entered" from="Area2D" to="Area2D" method="_on_mouse_entered"]

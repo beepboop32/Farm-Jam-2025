@@ -16,6 +16,7 @@ func _ready() -> void:
 		print("No spawnPoint assigned!")
 		return
 	Global.init_sheep_data(Global.sheepCount)
+	$"Day Counter".text = "--Day %s--" % [Global.currentDay]
 	for i in range(Global.sheepCount):
 		var sheepInstance = sheepScene.instantiate()
 		get_tree().current_scene.add_child(sheepInstance)

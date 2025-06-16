@@ -1,5 +1,7 @@
 extends Node2D
 
+func _ready() -> void:
+	Global.currentDay += 1
 
 func _on_button_pressed() -> void:
 	Global.timeSpeedMultiplier = 1.0
