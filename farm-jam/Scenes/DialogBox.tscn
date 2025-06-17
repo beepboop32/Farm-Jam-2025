@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://cynaou744a64x"]
+
+[ext_resource type="Script" uid="uid://6ya0xs13ka7h" path="res://dialog_box.gd" id="1_s5i88"]
+[ext_resource type="Texture2D" uid="uid://dsnx2kvgraj6t" path="res://Assets/Sprites/pixelart/dialogBoxSprite.png" id="2_bi4ye"]
+[ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_wtqhb"]
+
+[sub_resource type="Animation" id="Animation_bi4ye"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wtqhb"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bi4ye"]
+_data = {
+&"RESET": SubResource("Animation_bi4ye"),
+&"fade_in": SubResource("Animation_wtqhb")
+}
+
+[node name="DialogBox" type="CanvasLayer"]
+script = ExtResource("1_s5i88")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -420.0
+offset_top = -152.0
+offset_right = 419.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_bi4ye")
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogLabel" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 823.0
+offset_bottom = 137.0
+theme_override_fonts/font = ExtResource("3_wtqhb")
+theme_override_font_sizes/font_size = 50
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bi4ye")
+}

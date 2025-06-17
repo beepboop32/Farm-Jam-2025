@@ -2,12 +2,14 @@ extends CanvasLayer
 
 @export var wheat_texture: Texture2D
 @export var pointer_texture: Texture2D
+@export var hand_texture: Texture2D
 var max_food_hand := 10
 
 var cursor_sprite := Sprite2D.new()
 var wheat_container := Node2D.new()
 
 func _ready():
+	cursor_sprite.texture = pointer_texture
 	add_child(wheat_container)
 	add_child(cursor_sprite)
 	cursor_sprite.z_index = 1000
@@ -26,7 +28,6 @@ func _process(_delta):
 		_update_wheat_sprites()
 	else:
 		cursor_sprite.visible = true
-		cursor_sprite.texture = pointer_texture
 		cursor_sprite.scale = Vector2.ONE * 2.0
 		_clear_wheat_sprites()
 
@@ -52,13 +53,18 @@ func _update_wheat_sprites():
 		if s:
 			s.position = Vector2(0, -i * 1.5)
 			s.rotation = wheat_rotations[i]
-			s.scale = Vector2.ONE
-
-
-
-
+			s.scale = Vector2.ONE * 1.5
 func _clear_wheat_sprites():
 	for i in range(wheat_container.get_child_count() - 1, -1, -1):
 		var s = wheat_container.get_child(i)
 		if s:
 			s.queue_free()
+
+
+func _on_area_2d_mouse_entered() -> void:
+	cursor_sprite.texture = hand_texture
+	print("MEOW")
+
+
+func _on_area_2d_mouse_exited() -> void:
+	cursor_sprite.texture = pointer_texture

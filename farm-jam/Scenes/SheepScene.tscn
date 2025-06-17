@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2tq7thewar7n"]
+[gd_scene load_steps=9 format=3 uid="uid://c2tq7thewar7n"]
 
 [ext_resource type="Texture2D" uid="uid://bcbqfmmd11gru" path="res://Assets/Sprites/pixelart/brownSheep.png" id="2_fflu7"]
 [ext_resource type="Texture2D" uid="uid://c3qfh1ejnj6sa" path="res://Assets/Sprites/pixelart/sheep.png" id="2_u3a04"]
@@ -15,10 +15,10 @@ script/source = "extends CharacterBody2D
 @export var SpriteB : Texture2D
 
 var sheep_id: int = -1
-var current_hunger: int = 0
+var current_hunger: int = 5
 var max_hunger: int = 10
 var health: int = 100
-var color_choice: int = 0  # 0 for SpriteA, 1 for SpriteB
+var color_choice: int = 0
 
 var moving := false
 var timer := 0.0
@@ -29,6 +29,8 @@ var waddleAmplitude := 0.15
 var waddleSpeed := 6.0
 var waddleTime := 0.0
 @onready var hunger_bar = $HungerBar
+@onready var tween = get_tree().create_tween()
+
 
 func update_hunger_bar():
 	if hunger_bar:
@@ -154,6 +156,20 @@ func apply_hunger_decay_on_load() -> bool:
 			Global.sheep_data[sheep_id][\"health\"] = 0
 		return true 
 	return false 
+
+
+func _on_mouse_entered() -> void:
+	tween.kill()
+	tween = get_tree().create_tween()
+	hunger_bar.visible = true
+	hunger_bar.modulate.a = 0.0
+	tween.tween_property(hunger_bar, \"modulate:a\", 1.0, 0.1)
+
+func _on_mouse_exited() -> void:
+	tween.kill()
+	tween = get_tree().create_tween()
+	tween.tween_property(hunger_bar, \"modulate:a\", 0.0, 0.5) 
+	tween.tween_callback(Callable(hunger_bar, \"hide\"))
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ilodc"]
@@ -163,7 +179,9 @@ shader_parameter/outline_color = Color(0, 0, 0, 0)
 shader_parameter/texture_region = Vector4(0, 0, 0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcrfa"]
-size = Vector2(48, 35)
+size = Vector2(60, 43)
+
+[sub_resource type="MeshTexture" id="MeshTexture_ilodc"]
 
 [node name="Sheep" type="CharacterBody2D"]
 collision_layer = 2
@@ -174,27 +192,32 @@ SpriteB = ExtResource("2_u3a04")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ilodc")
-scale = Vector2(1.5, 1.38)
+scale = Vector2(2, 1.84)
 texture = ExtResource("2_u3a04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.5)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_fcrfa")
 
 [node name="HungerBar" type="TextureProgressBar" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -29.0
-offset_top = -38.0
-offset_right = 92.0
-offset_bottom = -10.0
+offset_left = -45.0
+offset_top = -42.0
+offset_right = 76.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-min_value = 5.0
+scale = Vector2(0.75, 0.75)
 max_value = 5.0
 value = 5.0
+texture_under = SubResource("MeshTexture_ilodc")
 texture_progress = ExtResource("4_bjj5s")
+tint_under = Color(0, 1, 1, 1)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

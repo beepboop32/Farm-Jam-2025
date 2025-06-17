@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1r68ccpxkxc1"]
+
+[ext_resource type="Texture2D" uid="uid://d03l5286n4r38" path="res://Assets/Sprites/pixelart/titleScreen.png" id="1_8l4an"]
+[ext_resource type="Script" uid="uid://dfl852t8vixl8" path="res://Scenes/title_screen.gd" id="1_n15yj"]
+[ext_resource type="FontFile" uid="uid://06ad2pstj334" path="res://Assets/Daydream.ttf" id="2_n15yj"]
+[ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_emot1"]
+
+[sub_resource type="Animation" id="Animation_n15yj"]
+resource_name = "OtherTextANimation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OtherText:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_emot1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OtherText:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_emot1"]
+_data = {
+&"OtherTextANimation": SubResource("Animation_n15yj"),
+&"RESET": SubResource("Animation_emot1")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_n15yj")
+
+[node name="TitleScreen" type="Sprite2D" parent="."]
+texture = ExtResource("1_8l4an")
+centered = false
+
+[node name="TitleText" type="Label" parent="."]
+offset_left = 191.0
+offset_top = 65.0
+offset_right = 953.0
+offset_bottom = 258.0
+theme_override_fonts/font = ExtResource("2_n15yj")
+theme_override_font_sizes/font_size = 50
+text = "Silly Sheep Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OtherText" type="Label" parent="."]
+offset_left = 421.0
+offset_top = 561.0
+offset_right = 732.0
+offset_bottom = 595.0
+pivot_offset = Vector2(155.5, 17)
+theme_override_colors/font_color = Color(0.689405, 0.78687, 0.933234, 1)
+theme_override_fonts/font = ExtResource("3_emot1")
+theme_override_font_sizes/font_size = 25
+text = "Click to start"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_emot1")
+}
+autoplay = "OtherTextANimation"

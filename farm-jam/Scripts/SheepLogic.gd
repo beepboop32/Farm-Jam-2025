@@ -105,23 +105,16 @@ func set_hunger_health(current: int, max_h: int, hp: int) -> void:
 	health = hp
 
 func apply_hunger_decay_on_load() -> bool:
-	# Reduce hunger by random 10% to 50%
 	var decay_percent = randf_range(0.1, 0.5)
 	current_hunger = int(current_hunger * (1.0 - decay_percent))
-	
-	# Clamp to zero minimum
 	if current_hunger < 0:
 		current_hunger = 0
-
-	# Update global data
 	if sheep_id >= 0 and sheep_id < Global.sheep_data.size():
 		Global.sheep_data[sheep_id]["current_hunger"] = current_hunger
-
-	# If hunger is zero, sheep dies
 	if current_hunger == 0:
 		health = 0
 		if sheep_id >= 0 and sheep_id < Global.sheep_data.size():
 			Global.sheep_data[sheep_id]["health"] = 0
-		return true  # indicates dead
+		return true
 
-	return false  # alive
+	return false 

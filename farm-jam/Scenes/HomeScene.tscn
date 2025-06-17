@@ -18,14 +18,7 @@ load_path = "res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382d
 script = ExtResource("1_5xu7f")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.325441, 0.325441, 0.325441, 1)
-
-[node name="Button" type="Button" parent="."]
-offset_left = 908.0
-offset_top = 563.0
-offset_right = 1150.0
-offset_bottom = 632.0
-text = "Start New Day"
+color = Color(0.325, 0.325, 0.325, 1)
 
 [node name="HouseInteriorNoTv" type="Sprite2D" parent="."]
 position = Vector2(550.5, 308.5)
@@ -85,6 +78,13 @@ offset_top = 249.0
 offset_right = 473.0
 offset_bottom = 341.0
 
+[node name="Button" type="Button" parent="."]
+offset_left = 908.0
+offset_top = 563.0
+offset_right = 1150.0
+offset_bottom = 632.0
+text = "Start New Day"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("7_s1txa")
 wheat_texture = ExtResource("8_molqu")
@@ -92,5 +92,5 @@ pointer_texture = SubResource("CompressedTexture2D_eksxn")
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Lamp Switch" to="." method="_on_lamp_switch_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

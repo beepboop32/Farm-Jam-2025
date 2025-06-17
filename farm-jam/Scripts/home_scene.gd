@@ -1,7 +1,13 @@
 extends Node2D
+@export var fadeDuration = 0.75
 
 func _ready() -> void:
 	Global.currentDay += 1
+	var color = $CanvasModulate.color
+	color.a = 0.0
+	$CanvasModulate.color = color
+	var tween = create_tween()
+	tween.tween_property($CanvasModulate, "color", Color(color.r, color.g, color.b, 1.0), fadeDuration)
 
 func _on_button_pressed() -> void:
 	Global.timeSpeedMultiplier = 1.0

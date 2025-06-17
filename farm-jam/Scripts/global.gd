@@ -6,13 +6,13 @@ extends Node
 @export var darknessStartHour := 18
 @export var lightStartHour := 8
 var sanity : float = 1.0
-var timeSpeedMultiplier := 1.0
+var timeSpeedMultiplier := 0
 var skippingToDusk := false
 var totalMinutes: float = 6 * 60 
-var currentDay: int = 1
+var currentDay: int = 0
 var isDaytime: bool = true
 var speedMultiplier := 1.0
-var sheepCount = 2
+var sheepCount = 4
 var foodInHand = 0
 var foodInBox = 100
 

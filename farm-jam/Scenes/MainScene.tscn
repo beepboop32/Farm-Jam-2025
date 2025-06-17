@@ -1,15 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=22 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
 [ext_resource type="Texture2D" uid="uid://dasgkix1rstcy" path="res://Assets/Sprites/pixelart/timeProgressBar.png" id="3_y4jh7"]
 [ext_resource type="FontFile" uid="uid://06ad2pstj334" path="res://Assets/Daydream.ttf" id="4_q68mp"]
 [ext_resource type="Texture2D" uid="uid://bkbd4y6wdsolk" path="res://Assets/Sprites/pixelart/sun.png" id="5_f140w"]
-[ext_resource type="Script" uid="uid://kh01asdlfrpt" path="res://Scripts/SanityBar.gd" id="6_0iob3"]
-[ext_resource type="Texture2D" uid="uid://bnv6oc7shgdpt" path="res://Assets/Sprites/pixelart/sanityMeter.png" id="6_q68mp"]
-[ext_resource type="Texture2D" uid="uid://y7kt2wy2my0c" path="res://Assets/Sprites/pixelart/sadSanity.png" id="7_8ju71"]
-[ext_resource type="Texture2D" uid="uid://n4m3fkvrfpek" path="res://Assets/Sprites/pixelart/happySanity.png" id="7_f140w"]
-[ext_resource type="Texture2D" uid="uid://cbtv3e7butlam" path="res://Assets/Sprites/pixelart/midSanity.png" id="8_xb4mg"]
+[ext_resource type="Texture2D" uid="uid://hnqmtlj3s6uq" path="res://Assets/Sprites/pixelart/grabHand1.png" id="5_xb4mg"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="9_0iob3"]
 [ext_resource type="Material" uid="uid://b74xeffooabws" path="res://Assets/WindyTreeMaterial.tres" id="12_5qxwa"]
 [ext_resource type="Texture2D" uid="uid://b0bkrkykwraca" path="res://Assets/Sprites/pixelart/deadTree1.png" id="12_xb4mg"]
@@ -53,6 +49,7 @@ spawnPoint = NodePath("Spawn Point")
 script = ExtResource("15_xc4hf")
 wheat_texture = ExtResource("16_6rnll")
 pointer_texture = SubResource("CompressedTexture2D_6rnll")
+hand_texture = ExtResource("5_xb4mg")
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
 
@@ -82,7 +79,6 @@ ignore_texture_size = true
 stretch_mode = 3
 
 [node name="Time Text" type="Label" parent="Time Stuff"]
-texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -125,31 +121,8 @@ shape = SubResource("RectangleShape2D_0iob3")
 position = Vector2(242.75, 180.5)
 shape = SubResource("RectangleShape2D_4b75m")
 
-[node name="Insanity Stuff" type="Node2D" parent="."]
-script = ExtResource("6_0iob3")
-lowSanityTexture = ExtResource("7_8ju71")
-midSanityTexture = ExtResource("8_xb4mg")
-highSanityTexture = ExtResource("7_f140w")
-
-[node name="SanityMeter" type="Sprite2D" parent="Insanity Stuff"]
-position = Vector2(1008, 48)
-scale = Vector2(6, 6)
-texture = ExtResource("6_q68mp")
-
-[node name="Sanity Face" type="Sprite2D" parent="Insanity Stuff/SanityMeter"]
-position = Vector2(10, 0.5)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("7_f140w")
-
 [node name="Spawn Point" type="Node2D" parent="."]
 position = Vector2(205, 343)
-
-[node name="Decrease Sanity" type="Button" parent="."]
-offset_left = 941.0
-offset_top = 603.0
-offset_right = 1156.0
-offset_bottom = 645.0
-text = "Decrease Sanity"
 
 [node name="Dead Tree 1" type="Sprite2D" parent="."]
 visibility_layer = 512
@@ -182,6 +155,7 @@ position = Vector2(-8.5, -1)
 shape = SubResource("RectangleShape2D_5qxwa")
 
 [node name="Day Counter" type="Label" parent="."]
+texture_filter = 1
 offset_left = 6.0
 offset_top = 2.0
 offset_right = 1153.0
@@ -190,8 +164,10 @@ theme_override_fonts/font = ExtResource("4_q68mp")
 theme_override_font_sizes/font_size = 30
 text = "--Day 0--"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Time Stuff/Time Progress Bar" to="." method="_on_time_button_pressed"]
-[connection signal="pressed" from="Decrease Sanity" to="." method="_on_decrease_sanity_pressed"]
+[connection signal="mouse_entered" from="Area2D" to="CanvasLayer" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_entered" from="Area2D" to="Area2D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="CanvasLayer" method="_on_area_2d_mouse_exited"]
 [connection signal="mouse_exited" from="Area2D" to="Area2D" method="_on_mouse_exited"]

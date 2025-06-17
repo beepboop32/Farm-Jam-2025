@@ -1,0 +1,146 @@
+[gd_scene load_steps=18 format=3 uid="uid://mcopbjmfdx3k"]
+
+[ext_resource type="Script" uid="uid://fg7t22hl0n20" path="res://Scenes/TutorialManager.gd" id="1_d6567"]
+[ext_resource type="Texture2D" uid="uid://dnlwfvcggmcld" path="res://Assets/Sprites/pixelart/happyFarmScene1.png" id="1_map6f"]
+[ext_resource type="Texture2D" uid="uid://dsnx2kvgraj6t" path="res://Assets/Sprites/pixelart/dialogBoxSprite.png" id="2_ch2se"]
+[ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="2_hp5wx"]
+[ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_jbvax"]
+[ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="4_jbvax"]
+[ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="5_map6f"]
+
+[sub_resource type="Animation" id="Animation_bi4ye"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wtqhb"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bi4ye"]
+_data = {
+&"RESET": SubResource("Animation_bi4ye"),
+&"fade_in": SubResource("Animation_wtqhb")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hp5wx"]
+load_path = "res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33lju"]
+size = Vector2(24, 356)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2gab"]
+size = Vector2(319, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ls7or"]
+size = Vector2(27, 209)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v4vo"]
+size = Vector2(109.5, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pujgt"]
+size = Vector2(21, 172.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkm2r"]
+size = Vector2(439.5, 57)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="HappyFarmScene1" type="Sprite2D" parent="."]
+position = Vector2(575, 324)
+texture = ExtResource("1_map6f")
+
+[node name="Sheep" parent="." instance=ExtResource("2_hp5wx")]
+position = Vector2(167, 345)
+
+[node name="Sheep2" parent="." instance=ExtResource("2_hp5wx")]
+position = Vector2(305, 277)
+
+[node name="DialogBox" type="CanvasLayer" parent="."]
+script = ExtResource("1_d6567")
+
+[node name="Background" type="TextureRect" parent="DialogBox"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -420.0
+offset_top = -152.0
+offset_right = 419.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_ch2se")
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogLabel" type="Label" parent="DialogBox/Background"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 823.0
+offset_bottom = 137.0
+theme_override_fonts/font = ExtResource("3_jbvax")
+theme_override_font_sizes/font_size = 20
+autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogBox"]
+libraries = {
+&"": SubResource("AnimationLibrary_bi4ye")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_jbvax")
+wheat_texture = ExtResource("5_map6f")
+pointer_texture = SubResource("CompressedTexture2D_hp5wx")
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+
+[node name="Sheep Pen" type="StaticBody2D" parent="."]
+
+[node name="Wall 1" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(36, 340)
+shape = SubResource("RectangleShape2D_33lju")
+
+[node name="Wall 2" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(207, 494)
+shape = SubResource("RectangleShape2D_u2gab")
+
+[node name="Wall 3" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(365.5, 410.5)
+shape = SubResource("RectangleShape2D_ls7or")
+
+[node name="Wall 4" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(407.25, 330)
+shape = SubResource("RectangleShape2D_5v4vo")
+
+[node name="Wall 5" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(452.5, 239.25)
+shape = SubResource("RectangleShape2D_pujgt")
+
+[node name="Wall 6" type="CollisionShape2D" parent="Sheep Pen"]
+position = Vector2(242.75, 180.5)
+shape = SubResource("RectangleShape2D_xkm2r")
