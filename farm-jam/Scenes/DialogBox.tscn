@@ -67,9 +67,8 @@ offset_top = 10.0
 offset_right = 823.0
 offset_bottom = 137.0
 theme_override_fonts/font = ExtResource("3_wtqhb")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 20
 autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

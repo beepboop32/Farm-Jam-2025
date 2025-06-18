@@ -141,7 +141,6 @@ func _on_sheep_clicked() -> void:
 	if sheep_id >= 0 and sheep_id < Global.sheep_data.size():
 		Global.sheep_data[sheep_id][\"current_hunger\"] = current_hunger
 		Global.sheep_data[sheep_id][\"health\"] = health
-	print(Global.sheep_data[sheep_id])
 
 func apply_hunger_decay_on_load() -> bool:
 	var decay_percent = randf_range(0.1, 0.5)
