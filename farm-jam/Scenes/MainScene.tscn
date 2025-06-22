@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=32 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="15_xc4hf"]
 [ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="16_6rnll"]
 [ext_resource type="Texture2D" uid="uid://dyvon4f406pp" path="res://Assets/Sprites/pixelart/msg box 10-2-2.png" id="16_enc0b"]
+[ext_resource type="Script" uid="uid://cqweuuosayrt4" path="res://Scenes/self_box.gd" id="18_hx8n4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6rnll"]
 load_path = "res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"
@@ -195,6 +196,18 @@ texture = ExtResource("16_enc0b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DonateBox"]
 position = Vector2(614, 201)
+shape = SubResource("RectangleShape2D_hx8n4")
+
+[node name="SelfBox" type="Area2D" parent="."]
+script = ExtResource("18_hx8n4")
+
+[node name="Sprite2D" type="Sprite2D" parent="SelfBox"]
+position = Vector2(770.75, 199)
+scale = Vector2(0.367187, 1.4)
+texture = ExtResource("16_enc0b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelfBox"]
+position = Vector2(771.5, 199)
 shape = SubResource("RectangleShape2D_hx8n4")
 
 [node name="Stats Panel" type="Panel" parent="."]
