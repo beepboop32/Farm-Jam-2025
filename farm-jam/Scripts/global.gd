@@ -5,7 +5,9 @@ extends Node
 @export var duskHour := 20
 @export var darknessStartHour := 18
 @export var lightStartHour := 8
+var energy : float = 100
 var sanity : float = 1.0
+var bullets: int = 6
 var timeSpeedMultiplier := 0
 var skippingToDusk := false
 var totalMinutes: float = 6 * 60 
@@ -15,6 +17,10 @@ var speedMultiplier := 1.0
 var sheepCount = 4
 var foodInHand = 0
 var foodInBox = 100
+var sheepsDead = 0
+var sheep_overall_happiness = 1.0 
+var money: int = 0
+
 
 @onready var modulator: CanvasModulate = get_tree().current_scene.get_node("Modulator")
 
@@ -33,6 +39,19 @@ func _process(delta: float) -> void:
 	updateTimeLabel()
 	updateBrightness()
 	checkDayNight()
+
+	# --- Game Over Check (only in MainScene) ---
+	var current_scene = get_tree().get_current_scene()
+	if current_scene and current_scene.scene_file_path.ends_with("MainScene.tscn"):
+		if energy <= 0 or get_living_sheep_count() == 0:
+			get_tree().change_scene_to_file("res://Scenes/BaseEndScene.tscn")
+
+func get_living_sheep_count() -> int:
+	var count = 0
+	for sheep in sheep_data:
+		if sheep.has("health") and sheep["health"] > 0:
+			count += 1
+	return count
 
 func updateTimeLabel() -> void:
 	var hours = int(totalMinutes) / 60
@@ -100,10 +119,7 @@ func skipCycle() -> void:
 	timeSpeedMultiplier = 10.0 
 	skippingToDusk = true
 	speedMultiplier = 5.0
-
-
 var sheep_data = []
-
 func init_sheep_data(count: int) -> void:
 	if sheep_data.size() != count:
 		sheep_data.clear()

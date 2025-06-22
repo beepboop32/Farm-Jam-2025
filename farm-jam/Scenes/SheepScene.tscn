@@ -133,6 +133,7 @@ func _on_sheep_clicked() -> void:
 	if food_added <= 0:
 		return
 	Global.foodInHand = 0
+	Global.energy -= 1
 	current_hunger += food_added
 	if current_hunger > max_hunger:
 		var overfeed_amount = current_hunger - max_hunger

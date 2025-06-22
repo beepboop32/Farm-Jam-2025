@@ -45,4 +45,4 @@ func _on_lamp_switch_pressed() -> void:
 
 
 func _on_shop_button_pressed() -> void:
-	$"Shop Panel".visible = !$"Shop Panel".visible
+	$"ButtonLayer/Shop Panel".visible = !$"ButtonLayer/Shop Panel".visible

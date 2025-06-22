@@ -84,6 +84,68 @@ offset_bottom = 341.0
 layer = 2
 visible = false
 
+[node name="Shop Panel" type="Panel" parent="ButtonLayer"]
+visible = false
+offset_right = 1155.0
+offset_bottom = 652.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ButtonLayer/Shop Panel"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 111.0
+offset_right = 1150.0
+offset_bottom = 419.0
+alignment = 1
+
+[node name="Food Options" type="VBoxContainer" parent="ButtonLayer/Shop Panel/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="FoodA" type="Button" parent="ButtonLayer/Shop Panel/HBoxContainer/Food Options"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Food A"
+
+[node name="FoodB" type="Button" parent="ButtonLayer/Shop Panel/HBoxContainer/Food Options"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Food B"
+
+[node name="FoodC" type="Button" parent="ButtonLayer/Shop Panel/HBoxContainer/Food Options"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Food C"
+
+[node name="Put Down Methods" type="VBoxContainer" parent="ButtonLayer/Shop Panel/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="Method A" type="Button" parent="ButtonLayer/Shop Panel/HBoxContainer/Put Down Methods"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Method A"
+
+[node name="Method B" type="Button" parent="ButtonLayer/Shop Panel/HBoxContainer/Put Down Methods"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Method B"
+
+[node name="Method C" type="Button" parent="ButtonLayer/Shop Panel/HBoxContainer/Put Down Methods"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Method C"
+
+[node name="Label" type="Label" parent="ButtonLayer/Shop Panel"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 68.0
+offset_right = 779.0
+offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("10_eksxn")
+theme_override_font_sizes/font_size = 20
+text = "Goverment Credits: ????"
+horizontal_alignment = 1
+
 [node name="Shop Button" type="Button" parent="ButtonLayer"]
 offset_left = -2.0
 offset_top = 578.0
@@ -106,68 +168,6 @@ wheat_texture = ExtResource("8_molqu")
 pointer_texture = SubResource("CompressedTexture2D_eksxn")
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
-
-[node name="Shop Panel" type="Panel" parent="."]
-visible = false
-offset_right = 1155.0
-offset_bottom = 652.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Shop Panel"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 111.0
-offset_right = 1150.0
-offset_bottom = 419.0
-alignment = 1
-
-[node name="Food Options" type="VBoxContainer" parent="Shop Panel/HBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-
-[node name="FoodA" type="Button" parent="Shop Panel/HBoxContainer/Food Options"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-text = "Food A"
-
-[node name="FoodB" type="Button" parent="Shop Panel/HBoxContainer/Food Options"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-text = "Food B"
-
-[node name="FoodC" type="Button" parent="Shop Panel/HBoxContainer/Food Options"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-text = "Food C"
-
-[node name="Put Down Methods" type="VBoxContainer" parent="Shop Panel/HBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-
-[node name="Method A" type="Button" parent="Shop Panel/HBoxContainer/Put Down Methods"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-text = "Method A"
-
-[node name="Method B" type="Button" parent="Shop Panel/HBoxContainer/Put Down Methods"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-text = "Method B"
-
-[node name="Method C" type="Button" parent="Shop Panel/HBoxContainer/Put Down Methods"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-text = "Method C"
-
-[node name="Label" type="Label" parent="Shop Panel"]
-layout_mode = 0
-offset_left = 370.0
-offset_top = 68.0
-offset_right = 779.0
-offset_bottom = 95.0
-theme_override_fonts/font = ExtResource("10_eksxn")
-theme_override_font_sizes/font_size = 20
-text = "Goverment Credits: ????"
-horizontal_alignment = 1
 
 [connection signal="pressed" from="Lamp Switch" to="." method="_on_lamp_switch_pressed"]
 [connection signal="pressed" from="ButtonLayer/Shop Button" to="." method="_on_shop_button_pressed"]

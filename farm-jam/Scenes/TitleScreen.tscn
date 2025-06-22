@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b1r68ccpxkxc1"]
 
 [ext_resource type="Texture2D" uid="uid://d03l5286n4r38" path="res://Assets/Sprites/pixelart/titleScreen.png" id="1_8l4an"]
-[ext_resource type="Script" uid="uid://dfl852t8vixl8" path="res://Scenes/title_screen.gd" id="1_n15yj"]
+[ext_resource type="Script" uid="uid://dfl852t8vixl8" path="res://Scripts/title_screen.gd" id="1_n15yj"]
 [ext_resource type="FontFile" uid="uid://06ad2pstj334" path="res://Assets/Daydream.ttf" id="2_n15yj"]
 [ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_emot1"]
 

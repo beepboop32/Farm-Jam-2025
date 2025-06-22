@@ -3,6 +3,9 @@ extends CanvasLayer
 @export var wheat_texture: Texture2D
 @export var pointer_texture: Texture2D
 @export var hand_texture: Texture2D
+@export var target_texture: Texture2D
+@export var skeleton_scene: PackedScene
+
 var max_food_hand := 10
 
 var cursor_sprite := Sprite2D.new()
@@ -16,12 +19,23 @@ func _ready():
 	wheat_container.z_index = 1000
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	Global.foodInHand = 0
+	set_process_unhandled_input(true)
 
 func _process(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	cursor_sprite.global_position = mouse_pos
 	wheat_container.global_position = mouse_pos
 	Global.foodInHand = max(Global.foodInHand, 0)
+
+	var sheep_hovered := false
+	if Global.foodInHand == 0:
+		for sheep in get_tree().get_nodes_in_group("sheep"):
+			if not sheep.has_node("Sprite2D"):
+				continue
+			var sprite := sheep.get_node("Sprite2D") as Sprite2D
+			if sprite.get_rect().has_point(sprite.to_local(mouse_pos)):
+				sheep_hovered = true
+				break
 
 	if Global.foodInHand > 0:
 		cursor_sprite.visible = false
@@ -30,6 +44,10 @@ func _process(_delta):
 		cursor_sprite.visible = true
 		cursor_sprite.scale = Vector2.ONE * 2.0
 		_clear_wheat_sprites()
+		if sheep_hovered:
+			cursor_sprite.texture = target_texture
+		else:
+			cursor_sprite.texture = pointer_texture
 
 var wheat_rotations := []
 
@@ -63,8 +81,29 @@ func _clear_wheat_sprites():
 
 func _on_area_2d_mouse_entered() -> void:
 	cursor_sprite.texture = hand_texture
-	print("MEOW")
 
 
 func _on_area_2d_mouse_exited() -> void:
 	cursor_sprite.texture = pointer_texture
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if Global.foodInHand == 0 and Global.bullets > 0:
+			var mouse_pos = get_viewport().get_mouse_position()
+			for sheep in get_tree().get_nodes_in_group("sheep"):
+				if not sheep.has_node("Sprite2D"):
+					continue
+				var sprite := sheep.get_node("Sprite2D") as Sprite2D
+				if sprite.get_rect().has_point(sprite.to_local(mouse_pos)):
+					# Spawn skeleton at sheep's position
+					if skeleton_scene:
+						var skeleton = skeleton_scene.instantiate()
+						skeleton.global_position = sheep.global_position
+						get_tree().current_scene.add_child(skeleton)
+					# Kill the sheep
+					sheep.health = 0
+					if sheep.sheep_id >= 0 and sheep.sheep_id < Global.sheep_data.size():
+						Global.sheep_data[sheep.sheep_id]["health"] = 0
+					sheep.queue_free()
+					Global.bullets -= 1
+					break

@@ -11,9 +11,11 @@ var tutorial_messages: Array[String] = [
 	"🖱 Click to feed!\nClick on a sheep to feed it — they’ll appreciate it! :D",
 	"⚠️ Careful now...\nOverfeeding can upset your sheep or even cause harm. Feed with care!",
 	"❤️ Reproduction! \nHappy sheep will reproduce automatically! So make sure to treat them well :D",
+	"☠ Doom! \nSurvival is hard, if you run out of food or sheep you may not survive...",
 	"⚡ Your energy\nEvery action you take uses energy. Keep an eye on it!",
-	"🍖 Low on energy?\nYou can harvest a sheep to regain some energy.",
+	"🍖 Low on energy?\nYou can harvest a sheep by clicking it with no food in hand.",
 	"🌙 This one’s old...\nThis sheep has lived a full life. Put it down gently to help sustain your farm.",
+	"🛒 Capitilsim! \nYou can donate sheep corpses for goverment credits or eat them to sustain yourself :D",
 	"⏱ Time controls\nSee the clock? Click it to speed up time when you're ready.",
 	"🎉 That’s it!\nYou’re ready to farm — have fun and take care of your flock! :D"
 ]

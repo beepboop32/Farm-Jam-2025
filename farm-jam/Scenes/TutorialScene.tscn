@@ -1,13 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://mcopbjmfdx3k"]
+[gd_scene load_steps=27 format=3 uid="uid://mcopbjmfdx3k"]
 
-[ext_resource type="Script" uid="uid://fg7t22hl0n20" path="res://Scenes/TutorialManager.gd" id="1_d6567"]
+[ext_resource type="Script" uid="uid://fg7t22hl0n20" path="res://Scripts/TutorialManager.gd" id="1_d6567"]
 [ext_resource type="Texture2D" uid="uid://dnlwfvcggmcld" path="res://Assets/Sprites/pixelart/happyFarmScene1.png" id="1_map6f"]
 [ext_resource type="Texture2D" uid="uid://dsnx2kvgraj6t" path="res://Assets/Sprites/pixelart/dialogBoxSprite.png" id="2_ch2se"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="2_hp5wx"]
 [ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_jbvax"]
 [ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="4_jbvax"]
 [ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="5_map6f"]
-[ext_resource type="Script" uid="uid://dxglb38u06m4h" path="res://Scenes/TutorialBox.gd" id="8_33lju"]
+[ext_resource type="Texture2D" uid="uid://dasgkix1rstcy" path="res://Assets/Sprites/pixelart/timeProgressBar.png" id="7_xkm2r"]
+[ext_resource type="Script" uid="uid://dxglb38u06m4h" path="res://Scripts/TutorialBox.gd" id="8_33lju"]
+[ext_resource type="FontFile" uid="uid://06ad2pstj334" path="res://Assets/Daydream.ttf" id="8_hrv55"]
+[ext_resource type="Texture2D" uid="uid://hnqmtlj3s6uq" path="res://Assets/Sprites/pixelart/grabHand1.png" id="8_xkm2r"]
+[ext_resource type="Texture2D" uid="uid://bkbd4y6wdsolk" path="res://Assets/Sprites/pixelart/sun.png" id="9_h4w16"]
+[ext_resource type="Texture2D" uid="uid://y7kt2wy2my0c" path="res://Assets/Sprites/pixelart/sadSanity.png" id="9_hrv55"]
 
 [sub_resource type="Animation" id="Animation_bi4ye"]
 length = 0.5
@@ -70,6 +75,13 @@ size = Vector2(439.5, 57)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hp5wx"]
 size = Vector2(115.5, 119)
 
+[sub_resource type="LabelSettings" id="LabelSettings_f6dk7"]
+font = ExtResource("8_hrv55")
+
+[sub_resource type="LabelSettings" id="LabelSettings_5v4vo"]
+font = ExtResource("8_hrv55")
+font_size = 24
+
 [node name="Node2D" type="Node2D"]
 
 [node name="HappyFarmScene1" type="Sprite2D" parent="."]
@@ -121,6 +133,8 @@ libraries = {
 script = ExtResource("4_jbvax")
 wheat_texture = ExtResource("5_map6f")
 pointer_texture = SubResource("CompressedTexture2D_hp5wx")
+hand_texture = ExtResource("8_xkm2r")
+target_texture = ExtResource("9_hrv55")
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
 
@@ -156,6 +170,49 @@ script = ExtResource("8_33lju")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(478.25, 426.5)
 shape = SubResource("RectangleShape2D_hp5wx")
+
+[node name="Time Stuff" type="Node2D" parent="."]
+position = Vector2(6, 13)
+
+[node name="Time Progress Bar" type="TextureButton" parent="Time Stuff"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 26.0
+offset_right = 31.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+texture_normal = ExtResource("7_xkm2r")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Time Text" type="Label" parent="Time Stuff"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 32.0
+offset_right = 107.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_f6dk7")
+
+[node name="Sun Sprite" type="Sprite2D" parent="Time Stuff"]
+position = Vector2(118, 33)
+texture = ExtResource("9_h4w16")
+
+[node name="Energy Label" type="Label" parent="."]
+offset_left = 848.0
+offset_top = 26.0
+offset_right = 1144.0
+offset_bottom = 68.0
+text = "⚡Energy: 100%"
+label_settings = SubResource("LabelSettings_5v4vo")
 
 [connection signal="mouse_entered" from="Area2D" to="Area2D" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="Area2D" method="_on_mouse_exited"]

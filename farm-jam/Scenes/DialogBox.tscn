@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cynaou744a64x"]
 
-[ext_resource type="Script" uid="uid://6ya0xs13ka7h" path="res://dialog_box.gd" id="1_s5i88"]
+[ext_resource type="Script" uid="uid://6ya0xs13ka7h" path="res://Scripts/dialog_box.gd" id="1_s5i88"]
 [ext_resource type="Texture2D" uid="uid://dsnx2kvgraj6t" path="res://Assets/Sprites/pixelart/dialogBoxSprite.png" id="2_bi4ye"]
 [ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_wtqhb"]
 
