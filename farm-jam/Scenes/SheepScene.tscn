@@ -177,6 +177,11 @@ shader = ExtResource("4_ilodc")
 shader_parameter/outline_width = 1.0
 shader_parameter/outline_color = Color(0, 0, 0, 0)
 shader_parameter/texture_region = Vector4(0, 0, 0, 0)
+shader_parameter/interval = 0.25
+shader_parameter/timeDelay = 0.0
+shader_parameter/intensityX = 1.0
+shader_parameter/intensityY = 1.0
+shader_parameter/seed = 800853.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcrfa"]
 size = Vector2(60, 43)

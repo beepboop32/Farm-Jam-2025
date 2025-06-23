@@ -1,14 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmt8j72hedlv5"]
 
 [ext_resource type="Script" uid="uid://ccgh462y58upq" path="res://Scripts/skeleton.gd" id="1_abfcy"]
-[ext_resource type="Texture2D" uid="uid://bajqf5mkcixxe" path="res://Assets/Sprites/pixelart/skeleton-idle.png" id="1_vif15"]
+[ext_resource type="Texture2D" uid="uid://1hvo037lry4n" path="res://Assets/Sprites/pixelart/sheepCorpse.png" id="2_abfcy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lclxg"]
-atlas = ExtResource("1_vif15")
-region = Rect2(10, 16.5, 27, 32)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iuen5"]
 
 [node name="Node2D" type="Node2D" groups=["skeletons"]]
 script = ExtResource("1_abfcy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_lclxg")
+material = SubResource("ShaderMaterial_iuen5")
+position = Vector2(3, -16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_abfcy")
