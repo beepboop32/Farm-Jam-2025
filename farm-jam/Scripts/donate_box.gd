@@ -16,8 +16,9 @@ func _connect_skeleton(skeleton):
 		skeleton.connect("dropped", Callable(self, "_on_skeleton_dropped").bind(skeleton))
 
 func _on_skeleton_dropped(skeleton):
-	print("Received dropped signal from skeleton")
+	print("Received dropped signal from skeleton (donate)")
 	if self.get_global_rect().intersects(skeleton.get_global_rect()):
+		print("Skeleton dropped in donate box")
 		Global.money += 10
 		skeleton.queue_free()
 
@@ -27,4 +28,4 @@ func get_global_rect() -> Rect2:
 	if shape is RectangleShape2D:
 		var size = shape.extents * 2
 		return Rect2(pos - size / 2, size)
-	return Rect2(pos, Vector2(32, 32)) # fallback
+	return Rect2(pos, Vector2(32, 32))

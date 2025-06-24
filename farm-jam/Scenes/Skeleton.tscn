@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmt8j72hedlv5"]
 
 [ext_resource type="Script" uid="uid://ccgh462y58upq" path="res://Scripts/skeleton.gd" id="1_abfcy"]
-[ext_resource type="Texture2D" uid="uid://1hvo037lry4n" path="res://Assets/Sprites/pixelart/sheepCorpse.png" id="2_abfcy"]
+[ext_resource type="Texture2D" uid="uid://cmhnx0r3o0yic" path="res://Assets/Sprites/pixelart/sheepCorpse.png" id="2_abfcy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iuen5"]
 

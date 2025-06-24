@@ -1,23 +1,25 @@
-[gd_scene load_steps=32 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=35 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
 [ext_resource type="Texture2D" uid="uid://dasgkix1rstcy" path="res://Assets/Sprites/pixelart/timeProgressBar.png" id="3_y4jh7"]
+[ext_resource type="PackedScene" uid="uid://c0l6hcggqce1t" path="res://Ghost.tscn" id="4_c1ier"]
 [ext_resource type="FontFile" uid="uid://06ad2pstj334" path="res://Assets/Daydream.ttf" id="4_q68mp"]
 [ext_resource type="Texture2D" uid="uid://bkbd4y6wdsolk" path="res://Assets/Sprites/pixelart/sun.png" id="5_f140w"]
 [ext_resource type="Texture2D" uid="uid://hnqmtlj3s6uq" path="res://Assets/Sprites/pixelart/grabHand1.png" id="5_xb4mg"]
-[ext_resource type="Texture2D" uid="uid://y7kt2wy2my0c" path="res://Assets/Sprites/pixelart/sadSanity.png" id="6_5qxwa"]
+[ext_resource type="Texture2D" uid="uid://cfy12ahhhl3ut" path="res://Assets/Sprites/pixelart/scope.png" id="7_i0j58"]
 [ext_resource type="PackedScene" uid="uid://cmt8j72hedlv5" path="res://Scenes/Skeleton.tscn" id="7_xc4hf"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="9_0iob3"]
 [ext_resource type="Material" uid="uid://b74xeffooabws" path="res://Assets/WindyTreeMaterial.tres" id="12_5qxwa"]
 [ext_resource type="Texture2D" uid="uid://b0bkrkykwraca" path="res://Assets/Sprites/pixelart/deadTree1.png" id="12_xb4mg"]
 [ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="13_5qxwa"]
 [ext_resource type="Script" uid="uid://bcoiupcd3oktd" path="res://Scripts/FoodBox.gd" id="13_6t1o7"]
-[ext_resource type="Script" uid="uid://dl8h1pmvce2rt" path="res://Scenes/donate_box.gd" id="15_enc0b"]
+[ext_resource type="Script" uid="uid://dl8h1pmvce2rt" path="res://Scripts/donate_box.gd" id="15_enc0b"]
 [ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="15_xc4hf"]
 [ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="16_6rnll"]
-[ext_resource type="Texture2D" uid="uid://dyvon4f406pp" path="res://Assets/Sprites/pixelart/msg box 10-2-2.png" id="16_enc0b"]
-[ext_resource type="Script" uid="uid://cqweuuosayrt4" path="res://Scenes/self_box.gd" id="18_hx8n4"]
+[ext_resource type="Texture2D" uid="uid://dgkxpl7df8lsq" path="res://Assets/Sprites/pixelart/donationBox.png" id="16_i0j58"]
+[ext_resource type="Script" uid="uid://cqweuuosayrt4" path="res://Scripts/self_box.gd" id="18_hx8n4"]
+[ext_resource type="Texture2D" uid="uid://co6ohdmq8aobg" path="res://Assets/Sprites/pixelart/fridge.png" id="18_i0j58"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6rnll"]
 load_path = "res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"
@@ -50,8 +52,11 @@ size = Vector2(115, 122)
 font = ExtResource("4_q68mp")
 font_size = 24
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1ier"]
+size = Vector2(122, 120.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hx8n4"]
-size = Vector2(118, 112)
+size = Vector2(52.5, 74)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xc4hf"]
 font = ExtResource("13_5qxwa")
@@ -65,6 +70,7 @@ font_size = 24
 script = ExtResource("1_tr2i4")
 sheepScene = ExtResource("9_0iob3")
 skeletonScene = ExtResource("7_xc4hf")
+ghostScene = ExtResource("4_c1ier")
 spawnPoint = NodePath("Spawn Point")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -72,7 +78,7 @@ script = ExtResource("15_xc4hf")
 wheat_texture = ExtResource("16_6rnll")
 pointer_texture = SubResource("CompressedTexture2D_6rnll")
 hand_texture = ExtResource("5_xb4mg")
-target_texture = ExtResource("6_5qxwa")
+target_texture = ExtResource("7_i0j58")
 skeleton_scene = ExtResource("7_xc4hf")
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
@@ -187,27 +193,27 @@ text = "⚡Energy: 100%"
 label_settings = SubResource("LabelSettings_xb4mg")
 
 [node name="DonateBox" type="Area2D" parent="."]
+position = Vector2(627, 180)
 script = ExtResource("15_enc0b")
 
 [node name="Sprite2D" type="Sprite2D" parent="DonateBox"]
-position = Vector2(613.25, 201)
-scale = Vector2(0.367187, 1.4)
-texture = ExtResource("16_enc0b")
+scale = Vector2(1.33, 1.4)
+texture = ExtResource("16_i0j58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DonateBox"]
-position = Vector2(614, 201)
-shape = SubResource("RectangleShape2D_hx8n4")
+position = Vector2(0, 9.75)
+shape = SubResource("RectangleShape2D_c1ier")
 
 [node name="SelfBox" type="Area2D" parent="."]
+position = Vector2(901, 382)
 script = ExtResource("18_hx8n4")
 
 [node name="Sprite2D" type="Sprite2D" parent="SelfBox"]
-position = Vector2(770.75, 199)
-scale = Vector2(0.367187, 1.4)
-texture = ExtResource("16_enc0b")
+scale = Vector2(0.79, 0.79)
+texture = ExtResource("18_i0j58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelfBox"]
-position = Vector2(771.5, 199)
+position = Vector2(-1.75, 3)
 shape = SubResource("RectangleShape2D_hx8n4")
 
 [node name="Stats Panel" type="Panel" parent="."]

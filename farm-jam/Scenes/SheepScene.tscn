@@ -177,11 +177,6 @@ shader = ExtResource("4_ilodc")
 shader_parameter/outline_width = 1.0
 shader_parameter/outline_color = Color(0, 0, 0, 0)
 shader_parameter/texture_region = Vector4(0, 0, 0, 0)
-shader_parameter/interval = 0.25
-shader_parameter/timeDelay = 0.0
-shader_parameter/intensityX = 1.0
-shader_parameter/intensityY = 1.0
-shader_parameter/seed = 800853.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcrfa"]
 size = Vector2(60, 43)
@@ -201,7 +196,7 @@ scale = Vector2(2, 1.84)
 texture = ExtResource("2_u3a04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4.5)
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_fcrfa")
 
 [node name="HungerBar" type="TextureProgressBar" parent="."]

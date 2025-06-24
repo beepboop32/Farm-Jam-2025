@@ -2,6 +2,7 @@ extends Node2D
 
 @export var sheepScene: PackedScene
 @export var skeletonScene: PackedScene
+@export var ghostScene: PackedScene
 @export var spawnPoint: Node2D
 @onready var day_label = $"Stats Panel/Day Counter"
 var deaths = 0
@@ -70,13 +71,26 @@ func _ready() -> void:
 				deaths += 1
 				sheep_positions.append(sheepInstance.position)
 				sheepInstance.queue_free()
-
 	for pos in sheep_positions:
+		# Spawn skeleton
 		var skeletonInstance = skeletonScene.instantiate()
 		get_tree().current_scene.add_child(skeletonInstance)
 		if skeletonInstance is Node2D:
 			skeletonInstance.position = pos
 
+		# Spawn ghost
+		print("Spawning ghost!")
+		var ghostInstance = ghostScene.instantiate()
+		get_tree().current_scene.add_child(ghostInstance)
+		if ghostInstance is Node2D:
+			ghostInstance.position = pos
+			# Animate: fly up and fade out
+			var tween = get_tree().create_tween()
+			tween.tween_property(ghostInstance, "position:y", pos.y - 100, 1.5)
+			tween.tween_property(ghostInstance, "modulate:a", 0.0, 1.5)
+			tween.tween_property(ghostInstance, "position:y", pos.y - 100, 1.5)
+			tween.tween_property(ghostInstance, "modulate:a", 0.0, 1.5)
+			tween.finished.connect(func(): ghostInstance.queue_free())
 	$"Stats Panel/DeathLabel".text = "%d Sheep Died" % [deaths]
 	$"Stats Panel/BirthLabel".text = "%d Sheep Born" % [births]
 

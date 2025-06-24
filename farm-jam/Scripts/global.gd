@@ -5,7 +5,9 @@ extends Node
 @export var duskHour := 20
 @export var darknessStartHour := 18
 @export var lightStartHour := 8
-var energy : float = 100
+var energy: float = 100.0:
+	set(value):
+		energy = clamp(value, 0.0, 100.0)
 var sanity : float = 1.0
 var bullets: int = 6
 var timeSpeedMultiplier := 0

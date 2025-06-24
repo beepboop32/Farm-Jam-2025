@@ -4,10 +4,8 @@ var hovered = false
 
 func _ready() -> void:
 	$"/root/Node2D/FoodBar".value = Global.foodInBox
-	# Connect to all skeletons currently in the scene
 	for skeleton in get_tree().get_nodes_in_group("skeletons"):
 		_connect_skeleton(skeleton)
-	# Listen for new nodes added to the scene tree
 	get_tree().connect("node_added", Callable(self, "_on_node_added"))
 
 func _on_node_added(node):
@@ -44,8 +42,6 @@ func _input(event):
 			_add_food_to_box()
 		elif event.keycode == KEY_DOWN:
 			_remove_food_from_box()
-
-
 
 func _physics_process(delta: float) -> void:
 	$"/root/Node2D/FoodBar".value = Global.foodInBox

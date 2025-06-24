@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://mcopbjmfdx3k"]
 
 [ext_resource type="Script" uid="uid://fg7t22hl0n20" path="res://Scripts/TutorialManager.gd" id="1_d6567"]
-[ext_resource type="Script" uid="uid://0woerw12ody6" path="res://Scenes/tutorial_scene.gd" id="1_hrv55"]
+[ext_resource type="Script" uid="uid://0woerw12ody6" path="res://Scripts/tutorial_scene.gd" id="1_hrv55"]
 [ext_resource type="Texture2D" uid="uid://dnlwfvcggmcld" path="res://Assets/Sprites/pixelart/happyFarmScene1.png" id="1_map6f"]
 [ext_resource type="Texture2D" uid="uid://dsnx2kvgraj6t" path="res://Assets/Sprites/pixelart/dialogBoxSprite.png" id="2_ch2se"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="2_hp5wx"]
