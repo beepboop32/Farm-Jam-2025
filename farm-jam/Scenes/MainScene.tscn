@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=36 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://dl8h1pmvce2rt" path="res://Scripts/donate_box.gd" id="15_enc0b"]
 [ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="15_xc4hf"]
 [ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="16_6rnll"]
-[ext_resource type="Texture2D" uid="uid://dgkxpl7df8lsq" path="res://Assets/Sprites/pixelart/donationBox.png" id="16_i0j58"]
+[ext_resource type="Texture2D" uid="uid://ccfjgtb8dnlyh" path="res://Assets/Sprites/pixelart/donationBoxNew.png" id="17_c1ier"]
 [ext_resource type="Script" uid="uid://cqweuuosayrt4" path="res://Scripts/self_box.gd" id="18_hx8n4"]
 [ext_resource type="Texture2D" uid="uid://co6ohdmq8aobg" path="res://Assets/Sprites/pixelart/fridge.png" id="18_i0j58"]
 
@@ -56,7 +56,10 @@ font_size = 24
 size = Vector2(122, 120.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hx8n4"]
-size = Vector2(52.5, 74)
+size = Vector2(65, 93)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1ier"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xc4hf"]
 font = ExtResource("13_5qxwa")
@@ -107,6 +110,7 @@ scale = Vector2(5, 5)
 texture_normal = ExtResource("3_y4jh7")
 ignore_texture_size = true
 stretch_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Time Text" type="Label" parent="Time Stuff"]
 anchors_preset = 15
@@ -120,6 +124,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "00:00"
 label_settings = SubResource("LabelSettings_tr2i4")
+metadata/_edit_use_anchors_ = true
 
 [node name="Sun Sprite" type="Sprite2D" parent="Time Stuff"]
 position = Vector2(118, 33)
@@ -175,6 +180,7 @@ stretch_margin_left = 5
 stretch_margin_right = 6
 texture_progress = ExtResource("3_y4jh7")
 tint_progress = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="FoodBox" type="Area2D" parent="."]
 position = Vector2(514, 471)
@@ -191,6 +197,7 @@ offset_right = 1144.0
 offset_bottom = 78.0
 text = "⚡Energy: 100%"
 label_settings = SubResource("LabelSettings_xb4mg")
+metadata/_edit_use_anchors_ = true
 
 [node name="DonateBox" type="Area2D" parent="."]
 position = Vector2(627, 180)
@@ -198,27 +205,31 @@ script = ExtResource("15_enc0b")
 
 [node name="Sprite2D" type="Sprite2D" parent="DonateBox"]
 scale = Vector2(1.33, 1.4)
-texture = ExtResource("16_i0j58")
+texture = ExtResource("17_c1ier")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DonateBox"]
 position = Vector2(0, 9.75)
 shape = SubResource("RectangleShape2D_c1ier")
 
 [node name="SelfBox" type="Area2D" parent="."]
-position = Vector2(901, 382)
+position = Vector2(1108, 409)
 script = ExtResource("18_hx8n4")
 
 [node name="Sprite2D" type="Sprite2D" parent="SelfBox"]
-scale = Vector2(0.79, 0.79)
+position = Vector2(5.25, -11.25)
+scale = Vector2(0.895, 1.015)
 texture = ExtResource("18_i0j58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelfBox"]
-position = Vector2(-1.75, 3)
+position = Vector2(4.5, -6.5)
 shape = SubResource("RectangleShape2D_hx8n4")
 
 [node name="Stats Panel" type="Panel" parent="."]
+z_index = 4096
 offset_right = 1152.0
 offset_bottom = 647.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c1ier")
+metadata/_edit_use_anchors_ = true
 
 [node name="Day Counter" type="Label" parent="Stats Panel"]
 texture_filter = 1
@@ -241,6 +252,7 @@ offset_right = 807.0
 offset_bottom = 113.0
 text = "During the night"
 label_settings = SubResource("LabelSettings_xc4hf")
+metadata/_edit_use_anchors_ = true
 
 [node name="DeathLabel" type="Label" parent="Stats Panel"]
 layout_mode = 0
@@ -251,6 +263,7 @@ offset_bottom = 186.0
 text = "x Sheep Died"
 label_settings = SubResource("LabelSettings_6rnll")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="BirthLabel" type="Label" parent="Stats Panel"]
 layout_mode = 0
@@ -261,6 +274,7 @@ offset_bottom = 227.0
 text = "x Sheep Born"
 label_settings = SubResource("LabelSettings_6rnll")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="StolenLabel" type="Label" parent="Stats Panel"]
 layout_mode = 0
@@ -271,6 +285,7 @@ offset_bottom = 270.0
 text = "x Sheep Stolen"
 label_settings = SubResource("LabelSettings_6rnll")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ClickLabel" type="Label" parent="Stats Panel"]
 layout_mode = 0
@@ -281,6 +296,7 @@ offset_bottom = 616.0
 text = "--Click To Skip--"
 label_settings = SubResource("LabelSettings_6rnll")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Time Stuff/Time Progress Bar" to="." method="_on_time_button_pressed"]
 [connection signal="mouse_entered" from="FoodBox" to="CanvasLayer" method="_on_area_2d_mouse_entered"]

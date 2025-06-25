@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnquvp3ykp45k"]
+[gd_scene load_steps=3 format=3 uid="uid://dnquvp3ykp45k"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_qp6rh"]
-font_size = 60
+[ext_resource type="Script" uid="uid://cws83p3lhx4ig" path="res://Scenes/base_end_scene.gd" id="1_oeyi0"]
+[ext_resource type="Texture2D" uid="uid://dytcnb4orm580" path="res://Assets/Sprites/pixelart/newSheepGenocideEnding.png" id="2_g8xhu"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_oeyi0")
+Endings = Array[PackedScene]([null, null, null, null])
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Damn you lost :/"
-label_settings = SubResource("LabelSettings_qp6rh")
+[node name="ScenePicture" type="Sprite2D" parent="."]
+position = Vector2(578, 322)
+texture = ExtResource("2_g8xhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

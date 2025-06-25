@@ -163,6 +163,7 @@ theme_override_fonts/font = ExtResource("7_molqu")
 text = "Start New Day"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
 script = ExtResource("7_s1txa")
 wheat_texture = ExtResource("8_molqu")
 pointer_texture = SubResource("CompressedTexture2D_eksxn")
