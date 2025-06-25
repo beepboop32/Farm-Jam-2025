@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://mcopbjmfdx3k"]
+[gd_scene load_steps=36 format=3 uid="uid://mcopbjmfdx3k"]
 
 [ext_resource type="Script" uid="uid://fg7t22hl0n20" path="res://Scripts/TutorialManager.gd" id="1_d6567"]
 [ext_resource type="Script" uid="uid://0woerw12ody6" path="res://Scripts/tutorial_scene.gd" id="1_hrv55"]
@@ -15,7 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://qokaug6xkeos" path="res://Assets/Sprites/pixelart/meatChop.png" id="8_qifqw"]
 [ext_resource type="Texture2D" uid="uid://hnqmtlj3s6uq" path="res://Assets/Sprites/pixelart/grabHand1.png" id="8_xkm2r"]
 [ext_resource type="Texture2D" uid="uid://bkbd4y6wdsolk" path="res://Assets/Sprites/pixelart/sun.png" id="9_h4w16"]
-[ext_resource type="Texture2D" uid="uid://y7kt2wy2my0c" path="res://Assets/Sprites/pixelart/sadSanity.png" id="9_hrv55"]
+[ext_resource type="Texture2D" uid="uid://cfy12ahhhl3ut" path="res://Assets/Sprites/pixelart/scope.png" id="12_kxtmh"]
+[ext_resource type="PackedScene" uid="uid://cmt8j72hedlv5" path="res://Scenes/Skeleton.tscn" id="13_kxtmh"]
+[ext_resource type="PackedScene" uid="uid://c0l6hcggqce1t" path="res://Ghost.tscn" id="14_fckvl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4w16"]
 
@@ -172,7 +174,9 @@ script = ExtResource("4_jbvax")
 wheat_texture = ExtResource("5_map6f")
 pointer_texture = SubResource("CompressedTexture2D_hp5wx")
 hand_texture = ExtResource("8_xkm2r")
-target_texture = ExtResource("9_hrv55")
+target_texture = ExtResource("12_kxtmh")
+skeleton_scene = ExtResource("13_kxtmh")
+ghost_scene = ExtResource("14_fckvl")
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
 

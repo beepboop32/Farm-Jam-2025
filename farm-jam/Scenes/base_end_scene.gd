@@ -21,7 +21,5 @@ func _ready():
 		0.0, 0.5, 1.0
 	)
 
-
-
 	$ScenePicture.texture = Endings[Global.ending]
 	$DialogueBox/Label.text = Texts[Global.ending]

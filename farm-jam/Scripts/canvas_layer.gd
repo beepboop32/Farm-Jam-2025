@@ -109,10 +109,9 @@ func _unhandled_input(event):
 						ghost.global_position = sheep.global_position
 						get_tree().current_scene.add_child(ghost)
 						var tween = get_tree().create_tween()
-						tween.tween_property(ghost, "position:y", ghost.position.y - 100, 1.5)
+						tween.tween_property(ghost, "position:y", ghost.position.y - 250, 2.5)
 						tween.tween_property(ghost, "modulate:a", 0.0, 1.5)
 						tween.finished.connect(func(): ghost.queue_free())
-					# Kill the sheep
 					sheep.health = 0
 					if sheep.sheep_id >= 0 and sheep.sheep_id < Global.sheep_data.size():
 						Global.sheep_data[sheep.sheep_id]["health"] = 0
