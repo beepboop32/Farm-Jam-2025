@@ -1,14 +1,65 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnquvp3ykp45k"]
+[gd_scene load_steps=12 format=3 uid="uid://dnquvp3ykp45k"]
 
 [ext_resource type="Script" uid="uid://cws83p3lhx4ig" path="res://Scenes/base_end_scene.gd" id="1_oeyi0"]
 [ext_resource type="Texture2D" uid="uid://dytcnb4orm580" path="res://Assets/Sprites/pixelart/newSheepGenocideEnding.png" id="2_g8xhu"]
+[ext_resource type="Texture2D" uid="uid://c17kavopaasg4" path="res://Assets/Sprites/pixelart/dialogueBox.png" id="3_rtvy1"]
+[ext_resource type="Shader" uid="uid://dajpghw7tiemp" path="res://Scenes/BaseEndScene.gdshader" id="3_s8mra"]
+[ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="4_5ofx4"]
+[ext_resource type="Texture2D" uid="uid://qokaug6xkeos" path="res://Assets/Sprites/pixelart/meatChop.png" id="4_drkrc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drkrc"]
+
+[sub_resource type="Gradient" id="Gradient_drkrc"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_drkrc"]
+gradient = SubResource("Gradient_drkrc")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jw6e"]
+shader = ExtResource("3_s8mra")
+shader_parameter/gradient = SubResource("GradientTexture2D_drkrc")
+shader_parameter/circle_color = Color(1, 1, 0.368627, 0)
+shader_parameter/circle_multiplier = 10.0
+shader_parameter/speed = 1.0
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/rotation = Transform2D(1, -1, 1, 1, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s8mra"]
+font = ExtResource("4_5ofx4")
+font_size = 25
 
 [node name="Node2D" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_oeyi0")
-Endings = Array[PackedScene]([null, null, null, null])
+Endings = Array[Texture2D]([ExtResource("2_g8xhu")])
+Texts = Array[String](["Ending: Sheep Genocide"])
 
 [node name="ScenePicture" type="Sprite2D" parent="."]
-position = Vector2(578, 322)
+z_index = -1
 texture = ExtResource("2_g8xhu")
+centered = false
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DialogueBox" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_drkrc")
+position = Vector2(396, 509)
+texture = ExtResource("3_rtvy1")
+
+[node name="Sprite2D" type="Sprite2D" parent="DialogueBox"]
+z_index = -1
+material = SubResource("ShaderMaterial_2jw6e")
+position = Vector2(-19.75, 23.25)
+scale = Vector2(17.8594, 3.67188)
+texture = ExtResource("4_drkrc")
+
+[node name="Label" type="Label" parent="DialogueBox"]
+z_index = 1
+offset_left = -297.0
+offset_top = -37.0
+offset_right = 259.0
+offset_bottom = 83.0
+text = "Ending Text Here"
+label_settings = SubResource("LabelSettings_s8mra")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

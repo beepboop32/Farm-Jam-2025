@@ -1,21 +1,39 @@
-[gd_scene load_steps=29 format=3 uid="uid://mcopbjmfdx3k"]
+[gd_scene load_steps=34 format=3 uid="uid://mcopbjmfdx3k"]
 
 [ext_resource type="Script" uid="uid://fg7t22hl0n20" path="res://Scripts/TutorialManager.gd" id="1_d6567"]
 [ext_resource type="Script" uid="uid://0woerw12ody6" path="res://Scripts/tutorial_scene.gd" id="1_hrv55"]
 [ext_resource type="Texture2D" uid="uid://dnlwfvcggmcld" path="res://Assets/Sprites/pixelart/happyFarmScene1.png" id="1_map6f"]
-[ext_resource type="Texture2D" uid="uid://dsnx2kvgraj6t" path="res://Assets/Sprites/pixelart/dialogBoxSprite.png" id="2_ch2se"]
 [ext_resource type="PackedScene" uid="uid://c2tq7thewar7n" path="res://Scenes/SheepScene.tscn" id="2_hp5wx"]
 [ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_jbvax"]
 [ext_resource type="Script" uid="uid://d21jifshjfss5" path="res://Scripts/canvas_layer.gd" id="4_jbvax"]
+[ext_resource type="Texture2D" uid="uid://c17kavopaasg4" path="res://Assets/Sprites/pixelart/dialogueBox.png" id="5_hrv55"]
 [ext_resource type="Texture2D" uid="uid://5f8umfb0lik4" path="res://Assets/Sprites/pixelart/wheat.png" id="5_map6f"]
+[ext_resource type="Shader" uid="uid://dajpghw7tiemp" path="res://Scenes/BaseEndScene.gdshader" id="7_f6dk7"]
 [ext_resource type="Texture2D" uid="uid://dasgkix1rstcy" path="res://Assets/Sprites/pixelart/timeProgressBar.png" id="7_xkm2r"]
 [ext_resource type="Script" uid="uid://dxglb38u06m4h" path="res://Scripts/TutorialBox.gd" id="8_33lju"]
 [ext_resource type="FontFile" uid="uid://06ad2pstj334" path="res://Assets/Daydream.ttf" id="8_hrv55"]
+[ext_resource type="Texture2D" uid="uid://qokaug6xkeos" path="res://Assets/Sprites/pixelart/meatChop.png" id="8_qifqw"]
 [ext_resource type="Texture2D" uid="uid://hnqmtlj3s6uq" path="res://Assets/Sprites/pixelart/grabHand1.png" id="8_xkm2r"]
 [ext_resource type="Texture2D" uid="uid://bkbd4y6wdsolk" path="res://Assets/Sprites/pixelart/sun.png" id="9_h4w16"]
 [ext_resource type="Texture2D" uid="uid://y7kt2wy2my0c" path="res://Assets/Sprites/pixelart/sadSanity.png" id="9_hrv55"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4w16"]
+
+[sub_resource type="Gradient" id="Gradient_kxtmh"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nurse"]
+gradient = SubResource("Gradient_kxtmh")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fckvl"]
+shader = ExtResource("7_f6dk7")
+shader_parameter/gradient = SubResource("GradientTexture2D_nurse")
+shader_parameter/circle_color = Color(1, 0.109804, 0.368627, 0.372549)
+shader_parameter/circle_multiplier = 5.0
+shader_parameter/speed = 1.0
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/rotation = Transform2D(1, -1, 1, 1, 0, 0)
 
 [sub_resource type="Animation" id="Animation_bi4ye"]
 length = 0.5
@@ -110,21 +128,35 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -420.0
-offset_top = -152.0
-offset_right = 419.0
-offset_bottom = -3.0
+offset_left = -576.0
+offset_top = -414.0
+offset_right = 576.0
+offset_bottom = 234.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("2_ch2se")
+texture = ExtResource("5_hrv55")
+expand_mode = 1
+stretch_mode = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="DialogBox/Background"]
+z_index = -100
+material = SubResource("ShaderMaterial_fckvl")
+position = Vector2(555, 346.5)
+scale = Vector2(17.75, 3.71875)
+texture = ExtResource("8_qifqw")
+
 [node name="DialogLabel" type="Label" parent="DialogBox/Background"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 10.0
-offset_right = 823.0
-offset_bottom = 137.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.241417
+anchor_top = 0.443
+anchor_right = 0.728
+anchor_bottom = 0.659
+offset_left = -0.112
+offset_top = -0.0640259
+offset_right = 0.343933
+offset_bottom = -19.032
 theme_override_fonts/font = ExtResource("3_jbvax")
 theme_override_font_sizes/font_size = 20
 autowrap_mode = 3

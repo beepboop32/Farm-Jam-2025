@@ -123,7 +123,7 @@ func DisplayDay() -> void:
 		await _skip_to_stats_panel()
 		return
 
-	await wait_with_skip(1.0)
+	await wait_with_skip(0.5)
 	if skip_requested:
 		await _skip_to_stats_panel()
 		return
@@ -131,12 +131,12 @@ func DisplayDay() -> void:
 	for i in core_text.length():
 		typed += core_text[i]
 		day_label.text = "--%s--" % typed
-		await wait_with_skip(0.3)
+		await wait_with_skip(0.15)
 		if skip_requested:
 			await _skip_to_stats_panel()
 			return
 
-	await wait_with_skip(2.0)
+	await wait_with_skip(1.0)
 	if skip_requested:
 		await _skip_to_stats_panel()
 		return
@@ -144,7 +144,7 @@ func DisplayDay() -> void:
 	for i in range(core_text.length(), 0, -1):
 		typed = typed.substr(0, i - 1)
 		day_label.text = "--%s--" % typed
-		await wait_with_skip(0.3)
+		await wait_with_skip(0.15)
 		if skip_requested:
 			await _skip_to_stats_panel()
 			return

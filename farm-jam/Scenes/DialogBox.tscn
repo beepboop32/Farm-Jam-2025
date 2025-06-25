@@ -1,8 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://cynaou744a64x"]
+[gd_scene load_steps=12 format=3 uid="uid://cynaou744a64x"]
 
 [ext_resource type="Script" uid="uid://6ya0xs13ka7h" path="res://Scripts/dialog_box.gd" id="1_s5i88"]
-[ext_resource type="Texture2D" uid="uid://dsnx2kvgraj6t" path="res://Assets/Sprites/pixelart/dialogBoxSprite.png" id="2_bi4ye"]
+[ext_resource type="Shader" uid="uid://dajpghw7tiemp" path="res://Scenes/BaseEndScene.gdshader" id="2_q3o2b"]
+[ext_resource type="Texture2D" uid="uid://c17kavopaasg4" path="res://Assets/Sprites/pixelart/dialogueBox.png" id="2_wtqhb"]
+[ext_resource type="Texture2D" uid="uid://qokaug6xkeos" path="res://Assets/Sprites/pixelart/meatChop.png" id="3_skbd3"]
 [ext_resource type="FontFile" uid="uid://cxttx28wep8ak" path="res://Assets/Salmon Typewriter 9 Bold.ttf" id="3_wtqhb"]
+
+[sub_resource type="Gradient" id="Gradient_urw4t"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q3o2b"]
+gradient = SubResource("Gradient_urw4t")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0.0537634, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1lt4"]
+shader = ExtResource("2_q3o2b")
+shader_parameter/gradient = SubResource("GradientTexture2D_q3o2b")
+shader_parameter/circle_color = Color(1, 1, 0.368627, 0.533333)
+shader_parameter/circle_multiplier = 10.0
+shader_parameter/speed = 1.0
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/rotation = Transform2D(1, -1, 1, 1, 0, 0)
 
 [sub_resource type="Animation" id="Animation_bi4ye"]
 length = 0.5
@@ -51,21 +69,33 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -420.0
-offset_top = -152.0
-offset_right = 419.0
-offset_bottom = -3.0
+offset_left = -571.0
+offset_top = -417.0
+offset_right = 581.0
+offset_bottom = 231.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("2_bi4ye")
+texture = ExtResource("2_wtqhb")
 metadata/_edit_use_anchors_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+z_index = -100
+material = SubResource("ShaderMaterial_m1lt4")
+position = Vector2(555, 346.5)
+scale = Vector2(17.75, 3.71875)
+texture = ExtResource("3_skbd3")
+
 [node name="DialogLabel" type="Label" parent="Background"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 10.0
-offset_right = 823.0
-offset_bottom = 137.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.242
+anchor_top = 0.446
+anchor_right = 0.727
+anchor_bottom = 0.633
+offset_left = 0.215973
+offset_top = -0.00799561
+offset_right = 0.495911
+offset_bottom = -0.184021
 theme_override_fonts/font = ExtResource("3_wtqhb")
 theme_override_font_sizes/font_size = 20
 autowrap_mode = 3

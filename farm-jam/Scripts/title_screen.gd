@@ -1,7 +1,8 @@
 extends Node2D
-
+var pressed = false
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Enter") or event.is_action_pressed("ui_accept"):
+	if (event.is_action_pressed("Enter") or event.is_action_pressed("ui_accept")) and !pressed:
+		pressed = true
 		var tween = get_tree().create_tween()
 		tween.parallel().tween_property($TitleScreen/TitleText, "modulate", Color(1, 1, 1, 0), 0.25)
 		tween.parallel().tween_method(_set_shader_movement, 0.0, 1.0, 1.5)
