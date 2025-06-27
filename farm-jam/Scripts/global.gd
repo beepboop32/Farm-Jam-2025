@@ -9,6 +9,7 @@ var ending = 0
 var energy: float = 100.0:
 	set(value):
 		energy = clamp(value, 0.0, 100.0)
+var trap : bool = false
 var sanity : float = 1.0
 var bullets: int = 6
 var timeSpeedMultiplier := 0
@@ -22,31 +23,34 @@ var foodInHand = 0
 var foodInBox = 200
 var sheepsDead = 0
 var sheep_overall_happiness = 1.0 
-var money: int = 0
-
+var money: int = 100
+var timeToGlow = false
+var difficulty: int = 0
+var force_reproduction: int = 0
+var finalDay = 10
+var queueEnding = false
 
 @onready var modulator: CanvasModulate = get_tree().current_scene.get_node("Modulator")
 
 func _process(delta: float) -> void:
 	var minutesPerSecond = 24 * 60 / secondsPerDay
 	totalMinutes += minutesPerSecond * delta * timeSpeedMultiplier
-	if totalMinutes >= 1440:
-		totalMinutes -= 1440
-		currentDay += 1
 	if skippingToDusk:
 		if (totalMinutes / 60.0) >= duskHour:
 			speedMultiplier = 1.0
-			timeSpeedMultiplier = 1.0
+			timeSpeedMultiplier = 1
 			skippingToDusk = false
 			totalMinutes = duskHour * 60
 	updateTimeLabel()
 	updateBrightness()
 	checkDayNight()
-
-	# --- Game Over Check (only in MainScene) ---
 	var current_scene = get_tree().get_current_scene()
 	if current_scene and current_scene.scene_file_path.ends_with("MainScene.tscn"):
-		if energy <= 0 or get_living_sheep_count() == 0:
+		if get_living_sheep_count() == 0:
+			ending = 0
+			get_tree().change_scene_to_file("res://Scenes/BaseEndScene.tscn")
+		elif energy <= 0:
+			ending = 2
 			get_tree().change_scene_to_file("res://Scenes/BaseEndScene.tscn")
 
 func get_living_sheep_count() -> int:
@@ -115,6 +119,14 @@ func checkDayNight() -> void:
 	if newIsDaytime != isDaytime:
 		isDaytime = newIsDaytime
 		if !isDaytime:
+			currentDay += 1
+			difficulty += 1
+			if currentDay >= finalDay:
+				if sanity >= 0.5:
+					ending = 1
+				else:
+					ending = 4
+				queueEnding = true
 			get_tree().change_scene_to_file("res://Scenes/HomeScene.tscn")
 			timeSpeedMultiplier = 0.0
 
@@ -128,7 +140,7 @@ func init_sheep_data(count: int) -> void:
 		sheep_data.clear()
 		for i in range(count):
 			sheep_data.append({
-				"current_hunger": 5,
+				"current_hunger": 15,
 				"max_hunger": randi_range(5, 25),
 				"health": 25,
 				"color_choice": randi_range(0, 1)

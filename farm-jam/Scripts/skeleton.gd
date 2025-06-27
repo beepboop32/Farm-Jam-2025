@@ -12,8 +12,10 @@ func _input(event):
         if event.button_index == MOUSE_BUTTON_LEFT:
             if event.pressed and get_global_rect().has_point(get_global_mouse_position()):
                 dragging = true
+                Global.timeToGlow = true
             elif not event.pressed and dragging:
                 dragging = false
+                Global.timeToGlow = false
                 emit_signal("dropped")
     elif event is InputEventMouseMotion and dragging:
         global_position += event.relative

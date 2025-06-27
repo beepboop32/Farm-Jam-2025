@@ -32,6 +32,8 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
 	Global.timeSpeedMultiplier = 1.0
 	Global.totalMinutes = 6*60
+	if Global.queueEnding:
+		get_tree().change_scene_to_file("res://Scenes/BaseEndScene.tscn")
 	get_tree().change_scene_to_file("res://Scenes/MainScene.tscn")
 
 func _on_lamp_switch_pressed() -> void:

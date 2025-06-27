@@ -6,6 +6,7 @@ extends Node2D
 @export var spawnPoint: Node2D
 @onready var day_label = $"Stats Panel/Day Counter"
 var deaths = 0
+var skip_requested = false
 
 func _on_time_button_pressed() -> void:
 	Global.skipCycle()
@@ -41,21 +42,30 @@ func _ready() -> void:
 			healthy_sheep_indices.append(i)
 	
 	var pairs = healthy_sheep_indices.size() / 2
+	var forced_birth_done = false
 	for i in range(int(pairs)):
-		if randf() < 0.5:
+		var base_repro_chance = 0.5
+		var repro_chance = min(base_repro_chance + Global.difficulty * 0.03, 0.95)
+		var do_birth = randf() < repro_chance
+		if Global.force_reproduction > 0 and not forced_birth_done:
+			do_birth = true
+			forced_birth_done = true
+			Global.force_reproduction -= 1
+		if do_birth:
 			var new_sheep = {
-				"current_hunger": randi_range(3, 10),
+				"current_hunger": randi_range(5, 15),
 				"max_hunger": randi_range(5, 25),
 				"health": 100,
 				"color_choice": randi_range(0, 1)
 			}
+			if new_sheep["current_hunger"] > new_sheep["max_hunger"]:
+				new_sheep["current_hunger"] = new_sheep["max_hunger"]
 			Global.sheep_data.append(new_sheep)
 			Global.sheepCount += 1
 			births += 1
 
 	var sheep_positions := []
-
-	for i in range(Global.sheepCount):
+	for i in range(Global.sheepCount - 1, -1, -1):
 		var sheepInstance = sheepScene.instantiate()
 		get_tree().current_scene.add_child(sheepInstance)
 		if sheepInstance is Node2D:
@@ -68,33 +78,40 @@ func _ready() -> void:
 			)
 			sheepInstance.set_color_choice(Global.sheep_data[i]["color_choice"])
 			if sheepInstance.apply_hunger_decay_on_load():
+				print(Global.sheep_data[i])
 				deaths += 1
+				Global.sheepCount -= 1
+				Global.sheep_data.remove_at(i)
 				sheep_positions.append(sheepInstance.position)
 				sheepInstance.queue_free()
-	for pos in sheep_positions:
-		# Spawn skeleton
-		var skeletonInstance = skeletonScene.instantiate()
-		get_tree().current_scene.add_child(skeletonInstance)
-		if skeletonInstance is Node2D:
-			skeletonInstance.position = pos
-
-		# Spawn ghost
-		print("Spawning ghost!")
-		var ghostInstance = ghostScene.instantiate()
-		get_tree().current_scene.add_child(ghostInstance)
-		if ghostInstance is Node2D:
-			ghostInstance.position = pos
-			# Animate: fly up and fade out
-			var tween = get_tree().create_tween()
-			tween.tween_property(ghostInstance, "position:y", pos.y - 100, 1.5)
-			tween.tween_property(ghostInstance, "modulate:a", 0.0, 1.5)
-			tween.tween_property(ghostInstance, "position:y", pos.y - 100, 1.5)
-			tween.tween_property(ghostInstance, "modulate:a", 0.0, 1.5)
-			tween.finished.connect(func(): ghostInstance.queue_free())
 	$"Stats Panel/DeathLabel".text = "%d Sheep Died" % [deaths]
 	$"Stats Panel/BirthLabel".text = "%d Sheep Born" % [births]
 
-var skip_requested := false
+	var sheep_stolen = 0
+	if not Global.trap:
+		var base_steal_chance = 0.25
+		var steal_chance = min(base_steal_chance + Global.difficulty * 0.05, 0.9)
+		var max_to_steal = int(Global.sheepCount / 2)
+		var sheep_indices = []
+		for i in range(Global.sheepCount):
+			sheep_indices.append(i)
+		while sheep_stolen < max_to_steal and sheep_indices.size() > 0:
+			if randf() < steal_chance:
+				var idx = randi_range(0, sheep_indices.size() - 1)
+				var remove_id = sheep_indices[idx]
+				Global.sheep_data.remove_at(remove_id)
+				Global.sheepCount -= 1
+				sheep_indices.remove_at(idx)
+				for j in range(sheep_indices.size()):
+					if sheep_indices[j] > remove_id:
+						sheep_indices[j] -= 1
+				sheep_stolen += 1
+			else:
+				break
+	$"Stats Panel/StolenLabel".text = "%d Sheep Stolen" % [sheep_stolen]
+
+	for i in range(Global.sheep_data.size()):
+		Global.sheep_data[i]["current_hunger"] = max(0, Global.sheep_data[i]["current_hunger"] - (1 + Global.difficulty * 0.2))
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
@@ -166,5 +183,15 @@ func _skip_to_stats_panel() -> void:
 	await tween.finished
 	$"Stats Panel".visible = false
 
-func _physics_process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$"Energy Label".text = "⚡Energy: %d%%" % [round(Global.energy)]
+	# Outline glow for Donate Box and Self Box
+	var outline_color = Color(1,1,1,1) if Global.timeToGlow else Color(1,1,1,0)
+	if has_node("DonateBox"):
+		var donate_box = get_node("DonateBox")
+		if donate_box.has_node("Sprite2D"):
+			donate_box.get_node("Sprite2D").material.set_shader_parameter("outline_color", outline_color)
+	if has_node("SelfBox"):
+		var self_box = get_node("SelfBox")
+		if self_box.has_node("Sprite2D"):
+			self_box.get_node("Sprite2D").material.set_shader_parameter("outline_color", outline_color)

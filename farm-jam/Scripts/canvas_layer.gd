@@ -108,13 +108,15 @@ func _unhandled_input(event):
 						var ghost = ghost_scene.instantiate()
 						ghost.global_position = sheep.global_position
 						get_tree().current_scene.add_child(ghost)
-						var tween = get_tree().create_tween()
-						tween.tween_property(ghost, "position:y", ghost.position.y - 250, 2.5)
-						tween.tween_property(ghost, "modulate:a", 0.0, 1.5)
-						tween.finished.connect(func(): ghost.queue_free())
+						var tween1 = get_tree().create_tween()
+						tween1.tween_property(ghost, "position:y", ghost.position.y - 250, 2.5)
+						var tween2 = get_tree().create_tween()
+						tween2.tween_property(ghost, "modulate:a", 0.0, 1.5)
+						tween2.finished.connect(func(): ghost.queue_free())
 					sheep.health = 0
 					if sheep.sheep_id >= 0 and sheep.sheep_id < Global.sheep_data.size():
-						Global.sheep_data[sheep.sheep_id]["health"] = 0
+						Global.sheep_data.remove_at(sheep.sheep_id)
+						Global.sheepCount -= 1
 					sheep.queue_free()
 					Global.bullets -= 1
 					break
