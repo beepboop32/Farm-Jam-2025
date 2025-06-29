@@ -32,7 +32,7 @@ shader_parameter/rotation = Transform2D(1, -1, 1, 1, 0, 0)
 font = ExtResource("4_5ofx4")
 font_size = 25
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_oeyi0")
 Endings = Array[Texture2D]([ExtResource("2_g8xhu"), ExtResource("3_nurse"), ExtResource("4_k7ic0"), ExtResource("5_2jw6e")])
 Texts = Array[String](["Ending: Sheep Genocide", "Ending: Friend of Lamb", "Ending: Hunger's Pain", "Ending: Torturers Fate"])

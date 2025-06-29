@@ -42,14 +42,13 @@ func _ready() -> void:
 			healthy_sheep_indices.append(i)
 	
 	var pairs = healthy_sheep_indices.size() / 2
-	var forced_birth_done = false
+	pairs += Global.force_reproduction
 	for i in range(int(pairs)):
 		var base_repro_chance = 0.5
 		var repro_chance = min(base_repro_chance + Global.difficulty * 0.03, 0.95)
 		var do_birth = randf() < repro_chance
-		if Global.force_reproduction > 0 and not forced_birth_done:
+		if Global.force_reproduction > 0:
 			do_birth = true
-			forced_birth_done = true
 			Global.force_reproduction -= 1
 		if do_birth:
 			var new_sheep = {
@@ -63,30 +62,6 @@ func _ready() -> void:
 			Global.sheep_data.append(new_sheep)
 			Global.sheepCount += 1
 			births += 1
-
-	var sheep_positions := []
-	for i in range(Global.sheepCount - 1, -1, -1):
-		var sheepInstance = sheepScene.instantiate()
-		get_tree().current_scene.add_child(sheepInstance)
-		if sheepInstance is Node2D:
-			sheepInstance.position = spawnPoint.position
-			sheepInstance.sheep_id = i
-			sheepInstance.set_hunger_health(
-				Global.sheep_data[i]["current_hunger"],
-				Global.sheep_data[i]["max_hunger"],
-				Global.sheep_data[i]["health"]
-			)
-			sheepInstance.set_color_choice(Global.sheep_data[i]["color_choice"])
-			if sheepInstance.apply_hunger_decay_on_load():
-				print(Global.sheep_data[i])
-				deaths += 1
-				Global.sheepCount -= 1
-				Global.sheep_data.remove_at(i)
-				sheep_positions.append(sheepInstance.position)
-				sheepInstance.queue_free()
-	$"Stats Panel/DeathLabel".text = "%d Sheep Died" % [deaths]
-	$"Stats Panel/BirthLabel".text = "%d Sheep Born" % [births]
-
 	var sheep_stolen = 0
 	if not Global.trap:
 		var base_steal_chance = 0.25
@@ -108,8 +83,32 @@ func _ready() -> void:
 				sheep_stolen += 1
 			else:
 				break
+	var sheep_positions := []
+	for i in range(Global.sheepCount - 1, -1, -1):
+		var sheepInstance = sheepScene.instantiate()
+		get_tree().current_scene.add_child(sheepInstance)
+		if sheepInstance is Node2D:
+			sheepInstance.position = spawnPoint.position
+			sheepInstance.sheep_id = i
+			sheepInstance.set_hunger_health(
+				Global.sheep_data[i]["current_hunger"],
+				Global.sheep_data[i]["max_hunger"],
+				Global.sheep_data[i]["health"]
+			)
+			sheepInstance.set_color_choice(Global.sheep_data[i]["color_choice"])
+			if sheepInstance.apply_hunger_decay_on_load():
+				print(Global.sheep_data[i])
+				deaths += 1
+				Global.sheepCount -= 1
+				Global.sheep_data.remove_at(i)
+				sheep_positions.append(sheepInstance.position)
+				sheepInstance.queue_free()
+	var sheep_list = get_tree().get_nodes_in_group("sheep")
+	for j in range(sheep_list.size()):
+		sheep_list[j].sheep_id = j
+	$"Stats Panel/DeathLabel".text = "%d Sheep Died" % [deaths]
+	$"Stats Panel/BirthLabel".text = "%d Sheep Born" % [births]
 	$"Stats Panel/StolenLabel".text = "%d Sheep Stolen" % [sheep_stolen]
-
 	for i in range(Global.sheep_data.size()):
 		Global.sheep_data[i]["current_hunger"] = max(0, Global.sheep_data[i]["current_hunger"] - (1 + Global.difficulty * 0.2))
 

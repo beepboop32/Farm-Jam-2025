@@ -79,10 +79,8 @@ func _clear_wheat_sprites():
 		if s:
 			s.queue_free()
 
-
 func _on_area_2d_mouse_entered() -> void:
 	cursor_sprite.texture = hand_texture
-
 
 func _on_area_2d_mouse_exited() -> void:
 	cursor_sprite.texture = pointer_texture
@@ -91,18 +89,17 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if Global.foodInHand == 0 and Global.bullets > 0:
 			var mouse_pos = get_viewport().get_mouse_position()
-			for sheep in get_tree().get_nodes_in_group("sheep"):
+			var sheep_list = get_tree().get_nodes_in_group("sheep")
+			for sheep in sheep_list:
 				if not sheep.has_node("Sprite2D"):
 					continue
 				var sprite := sheep.get_node("Sprite2D") as Sprite2D
 				if sprite.get_rect().has_point(sprite.to_local(mouse_pos)):
-					# Spawn skeleton at sheep's position
 					if skeleton_scene:
 						print("Spawning skeleton at sheep's position")
 						var skeleton = skeleton_scene.instantiate()
 						skeleton.global_position = sheep.global_position
 						get_tree().current_scene.add_child(skeleton)
-					# Spawn ghost at sheep's position
 					if ghost_scene:
 						print("Spawning ghost at sheep's position")
 						var ghost = ghost_scene.instantiate()
@@ -114,9 +111,14 @@ func _unhandled_input(event):
 						tween2.tween_property(ghost, "modulate:a", 0.0, 1.5)
 						tween2.finished.connect(func(): ghost.queue_free())
 					sheep.health = 0
-					if sheep.sheep_id >= 0 and sheep.sheep_id < Global.sheep_data.size():
-						Global.sheep_data.remove_at(sheep.sheep_id)
+					var remove_index = sheep_list.find(sheep)
+					if remove_index >= 0 and remove_index < Global.sheep_data.size():
+						Global.sheep_data.remove_at(remove_index)
 						Global.sheepCount -= 1
-					sheep.queue_free()
-					Global.bullets -= 1
-					break
+						sheep.queue_free()
+						var updated_sheep_list = get_tree().get_nodes_in_group("sheep")
+						for i in range(updated_sheep_list.size()):
+							updated_sheep_list[i].sheep_id = i
+						Global.bullets -= 1
+						print(Global.sheep_data)
+						break

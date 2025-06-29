@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bprghqf4qb5rb"]
+[gd_scene load_steps=42 format=3 uid="uid://bprghqf4qb5rb"]
 
 [ext_resource type="Script" uid="uid://b5nvsdnlnpgvi" path="res://Scripts/main_scene.gd" id="1_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://d3ypnoixld0rb" path="res://Assets/Sprites/pixelart/farmScene2-export.png" id="2_xb4mg"]
@@ -22,6 +22,8 @@
 [ext_resource type="Script" uid="uid://cqweuuosayrt4" path="res://Scripts/self_box.gd" id="18_hx8n4"]
 [ext_resource type="Texture2D" uid="uid://co6ohdmq8aobg" path="res://Assets/Sprites/pixelart/fridge.png" id="18_i0j58"]
 [ext_resource type="Texture2D" uid="uid://b24inpwnpxoy1" path="res://Assets/Sprites/pixelart/gun.png" id="20_gyaec"]
+[ext_resource type="Script" uid="uid://dm47hnbackl4k" path="res://Scenes/bullets_bar_custom.gd" id="22_3va76"]
+[ext_resource type="Texture2D" uid="uid://d177lg7rls1d2" path="res://Assets/Sprites/pixelart/bullet.png" id="23_wmecs"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6rnll"]
 load_path = "res://.godot/imported/mousePointer.png-78c64cfd51de3a0073bb7e04382de61c.ctex"
@@ -248,6 +250,8 @@ texture = ExtResource("20_gyaec")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(886, 603)
+script = ExtResource("22_3va76")
+bullet_texture = ExtResource("23_wmecs")
 
 [node name="Stats Panel" type="Panel" parent="."]
 z_index = 4096
