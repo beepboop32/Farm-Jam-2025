@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ct054atm8foav"]
+[gd_scene load_steps=21 format=3 uid="uid://ct054atm8foav"]
 
 [ext_resource type="Script" uid="uid://hq7weqvxpk7h" path="res://Scripts/home_scene.gd" id="1_5xu7f"]
 [ext_resource type="Texture2D" uid="uid://dhrixjycyu4g" path="res://Assets/Sprites/pixelart/houseInteriorNoTv.png" id="2_5xu7f"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://d177lg7rls1d2" path="res://Assets/Sprites/pixelart/bullet.png" id="10_iigs7"]
 [ext_resource type="Texture2D" uid="uid://bwgbuun1fuiqb" path="res://Assets/Sprites/pixelart/bearTrap.png" id="11_j4p5n"]
 [ext_resource type="Script" uid="uid://cqv4y2t4nu31" path="res://Scenes/label.gd" id="13_dqj2a"]
+[ext_resource type="Texture2D" uid="uid://5ja01c20ms4v" path="res://Assets/Sprites/pixelart/ivf.png" id="13_ix7gp"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mxma7"]
 
@@ -162,6 +163,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "$10 - IVF"
+icon = ExtResource("13_ix7gp")
 alignment = 0
 expand_icon = true
 
