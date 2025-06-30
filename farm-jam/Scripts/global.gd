@@ -15,7 +15,7 @@ var bullets: int = 6
 var timeSpeedMultiplier := 0
 var skippingToDusk := false
 var totalMinutes: float = 6 * 60 
-var currentDay: int = 0
+var currentDay: int = 1
 var isDaytime: bool = true
 var speedMultiplier := 1.0
 var sheepCount = 4
@@ -27,7 +27,7 @@ var money: int = 100
 var timeToGlow = false
 var difficulty: int = 0
 var force_reproduction: int = 0
-var finalDay = 2
+var finalDay = 10
 var queueEnding = false
 
 @onready var modulator: CanvasModulate = get_tree().current_scene.get_node("Modulator")
