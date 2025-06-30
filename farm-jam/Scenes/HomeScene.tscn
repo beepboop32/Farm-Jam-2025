@@ -179,6 +179,17 @@ text = "Goverment Credits: ????"
 horizontal_alignment = 1
 script = ExtResource("13_dqj2a")
 
+[node name="Label2" type="Label" parent="ButtonLayer/Shop Panel"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 419.0
+offset_right = 572.0
+offset_bottom = 575.0
+text = "NutriPaste: Tired of chewing then our artificial feed is perfect!
+Carnaline: Crushed up bones and microplastics perfect for a young Lamb
+(Tip: Cheaper immoral food gives the same as moral more expensive food!)"
+autowrap_mode = 2
+
 [node name="Shop Button" type="Button" parent="ButtonLayer"]
 offset_left = -2.0
 offset_top = 578.0

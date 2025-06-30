@@ -15,6 +15,7 @@ func _on_decrease_sanity_pressed() -> void:
 	Global.sanity -= 0.1
 
 func _ready() -> void:
+	Global.home = false
 	set_process_input(true)
 	DisplayDay()
 	deaths = 0

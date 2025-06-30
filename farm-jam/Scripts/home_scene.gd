@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 		$ButtonLayer.visible = true
 
 func _ready() -> void:
-	print(Global.currentDay)
+	Global.home = true
 	var color = $CanvasModulate.color
 	color.a = 0.0
 	$CanvasModulate.color = color

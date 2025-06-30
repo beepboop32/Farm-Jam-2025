@@ -23,12 +23,13 @@ var foodInHand = 0
 var foodInBox = 100
 var sheepsDead = 0
 var sheep_overall_happiness = 1.0 
-var money: int = 100
+var money: int = 50
 var timeToGlow = false
 var difficulty: int = 0
 var force_reproduction: int = 0
 var finalDay = 10
 var queueEnding = false
+var home = false
 
 @onready var modulator: CanvasModulate = get_tree().current_scene.get_node("Modulator")
 
@@ -120,12 +121,13 @@ func checkDayNight() -> void:
 		isDaytime = newIsDaytime
 		if !isDaytime:
 			currentDay += 1
-			difficulty += 1
+			difficulty += (3 * sanity)
+			money += (5 + (1 - sanity))*2
 			if currentDay >= finalDay:
 				if sanity >= 0.5:
 					ending = 1
 				else:
-					ending = 4
+					ending = 3
 				queueEnding = true
 			get_tree().change_scene_to_file("res://Scenes/HomeScene.tscn")
 			timeSpeedMultiplier = 0.0
