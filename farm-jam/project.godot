@@ -11,10 +11,12 @@ config_version=5
 [application]
 
 config/name="Farm Jam"
+config/description="Silly Sheep Game innit"
 run/main_scene="uid://b1r68ccpxkxc1"
 config/features=PackedStringArray("4.4", "Forward Plus")
-boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="uid://dau6s8r02j3of"
+config/icon="uid://dau6s8r02j3of"
 
 [autoload]
 
